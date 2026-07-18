@@ -1,0 +1,78 @@
+@import 'tailwindcss';
+
+@font-face {
+  font-family: 'Outfit';
+  src: url('https://static.figma.com/font/Outfit_wght__2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'DM Sans';
+  src: url('https://static.figma.com/font/DMSans_opsz_wght__1') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --bg: #f9f9f9;
+  --surface: #0C0C1E;
+  --surface2: #131328;
+  --surface3: #1A1A35;
+  --border: #1E1E3E;
+  --border2: #2A2A50;
+  --text: #F0F0FF;
+  --text-muted: #6666AA;
+  --text-dim: #9999CC;
+  --blue: #4F7FFA;
+  --blue-bright: #6B95FF;
+  --gold: #F5A623;
+  --green: #22C55E;
+  --red: #EF4444;
+  --purple: #8B5CF6;
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #02020A;
+}
+
+body {
+  color: var(--text);
+  font-family: 'DM Sans', system-ui, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+
+#root {
+  width: 100%;
+  max-width: 430px;
+  min-height: 100vh;
+  position: relative;
+  background: var(--bg);
+  overflow-x: hidden;
+}
+
+h1,h2,h3,h4,h5,h6 { font-family: 'Outfit', system-ui, sans-serif; margin: 0; }
+p, span { margin: 0; }
+button { cursor: pointer; border: none; background: none; padding: 0; font-family: 'Outfit', system-ui, sans-serif; }
+input, textarea { font-family: 'DM Sans', system-ui, sans-serif; outline: none; }
+a { text-decoration: none; color: inherit; }
+
+::-webkit-scrollbar { display: none; }
+
+.screen {
+  width: 100%;
+  min-height: 100dvh;
+  padding-bottom: 88px;
+  overflow-y: auto;
+}

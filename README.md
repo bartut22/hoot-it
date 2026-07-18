@@ -91,4 +91,3 @@ The app uses Supabase for authentication and onboarding:
 - The app is optimized for the Figma Make environment, where the Vite dev server is already available during development.
 - Routes include stack-style overlays for profiles and posts, so navigation can behave like a mobile app even in the browser.
 
-\

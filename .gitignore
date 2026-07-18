@@ -25,6 +25,7 @@ dist-ssr/
 .env.production.local
 
 # Editor directories and files
+.vscode/
 .vscode/*
 !.vscode/extensions.json
 .idea/
@@ -37,3 +38,9 @@ dist-ssr/
 # Operating System files
 .DS_Store
 Thumbs.db
+
+# Supabase local development data
+supabase/.branches/
+supabase/.temp/
+supabase/functions/**/.env
+supabase/.migrations/
