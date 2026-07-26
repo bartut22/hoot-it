@@ -176,6 +176,7 @@ function MainApp({ session, modal, setModal, CHALLENGES }: any) {
         onSubmit={(media: any) =>
           setModal({ kind: "submit", challengeId: modal.challengeId, media })
         }
+        challenge={CHALLENGES.find((c: any) => c.id === modal.challengeId)}
       />
     );
   }

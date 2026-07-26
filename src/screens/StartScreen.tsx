@@ -258,7 +258,7 @@ export default function StartScreen({ userId, onStartNow }: { userId?: string; o
                     });
                   }}
                   style={{
-                    backgroundColor: '#4F7FFA',
+                    backgroundColor: 'rgb(47 43 71)',
                     color: 'white',
                     fontWeight: 300,
                     fontSize: "1.1rem",

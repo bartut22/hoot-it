@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { useLeaderboard } from "@/hooks/useLeaderboard";
@@ -77,23 +77,48 @@ function StudentRow({ m, rank }: { m: any; rank: number }) {
 export default function LeaderboardScreen() {
   const location = useLocation();
   const navigate = useNavigate();
-  const allTabs = ["All Students", "Colleges", ...Object.values(COLLEGES).map(c => c.name)];
+
+  const { data: LEADERBOARD, loading: collegesLoading } = useLeaderboard();
+  const { data: STUDENTS, loading: studentsLoading } = useStudentLeaderboard();
+
+  // Count students per college so we can hide empty colleges everywhere
+  const collegeCounts = useMemo(() => {
+    const counts: Record<string, number> = {};
+    STUDENTS.forEach((s: any) => {
+      counts[s.college_id] = (counts[s.college_id] || 0) + 1;
+    });
+    return counts;
+  }, [STUDENTS]);
+
+  // Only show college tabs that have at least one member
+  const allTabs = useMemo(() => {
+    const nonEmptyCollegeNames = Object.values(COLLEGES)
+      .filter((c: any) => (collegeCounts[c.id] || 0) > 0)
+      .map((c: any) => c.name);
+    return ["All Students", "Colleges", ...nonEmptyCollegeNames];
+  }, [collegeCounts]);
+
+  // Only show colleges with members in the "Colleges" overview
+  const visibleLeaderboard = useMemo(
+    () => LEADERBOARD.filter((college: any) => college.members > 0),
+    [LEADERBOARD]
+  );
 
   const requestedTab = location.state?.tab;
   const initialTab = requestedTab && allTabs.includes(requestedTab) ? requestedTab : "All Students";
   const [tab, setTab] = useState(initialTab);
 
-  const isStudentsView = tab === "All Students";
-  const isCollegesOverview = tab === "Colleges";
-  const isCollegeTab = !isStudentsView && !isCollegesOverview;
+  // If the currently selected tab becomes empty (e.g. after data loads), fall back safely
+  const activeTab = allTabs.includes(tab) ? tab : "All Students";
 
-  const { data: LEADERBOARD, loading: collegesLoading } = useLeaderboard();
-  const { data: STUDENTS, loading: studentsLoading } = useStudentLeaderboard();
+  const isStudentsView = activeTab === "All Students";
+  const isCollegesOverview = activeTab === "Colleges";
+  const isCollegeTab = !isStudentsView && !isCollegesOverview;
 
   const loading = isCollegesOverview ? collegesLoading : studentsLoading;
 
-  const SELECTED_COLLEGE_ID = getCollegeId(tab);
-  const COLLEGE_MEMBERS = STUDENTS.filter(s => s.college_id === SELECTED_COLLEGE_ID);
+  const SELECTED_COLLEGE_ID = getCollegeId(activeTab);
+  const COLLEGE_MEMBERS = STUDENTS.filter((s: any) => s.college_id === SELECTED_COLLEGE_ID);
 
   return (
     <div className="screen">
@@ -120,7 +145,7 @@ export default function LeaderboardScreen() {
           </h1>
         </div>
 
-        <CollegeTabs allTabs={allTabs} tab={tab} setTab={setTab} />
+        <CollegeTabs allTabs={allTabs} tab={activeTab} setTab={setTab} />
       </div>
 
       <div style={{ padding: "8px 16px 24px" }}>
@@ -137,9 +162,9 @@ export default function LeaderboardScreen() {
           ) : isCollegesOverview ? (
             <div style={{ display: "flex", flexDirection: "column", gap: 8, paddingTop: 8 }}>
               <div style={{ fontSize: 13, color: "#6666AA", marginBottom: 8 }}>
-                All colleges · {LEADERBOARD.length} competing
+                All colleges · {visibleLeaderboard.length} competing
               </div>
-              {LEADERBOARD.map((college, idx) => {
+              {visibleLeaderboard.map((college, idx) => {
                 const rank = idx + 1;
                 return (
                   <div
@@ -176,7 +201,7 @@ export default function LeaderboardScreen() {
           ) : (
             <div style={{ display: "flex", flexDirection: "column", gap: 8, paddingTop: 8 }}>
               <div style={{ fontSize: 13, color: "#6666AA", marginBottom: 8 }}>
-                {tab} · {COLLEGE_MEMBERS.length} member{COLLEGE_MEMBERS.length !== 1 ? "s" : ""}
+                {activeTab} · {COLLEGE_MEMBERS.length} member{COLLEGE_MEMBERS.length !== 1 ? "s" : ""}
               </div>
               {COLLEGE_MEMBERS.map((m, idx) => (
                 <StudentRow key={m.user_id} m={m} rank={idx + 1} />

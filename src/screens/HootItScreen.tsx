@@ -1,8 +1,10 @@
 import { useState, useRef, useEffect, useCallback } from "react";
+import { toast } from "sonner";
 
 type Props = {
   onBack: () => void;
-  onSubmit: (media: { type: "photo" | "video"; src: string }) => void;
+  challenge: { submission_type: ("photo" | "video" | "audio")[] };
+  onSubmit: (media: { type: "photo" | "video" | "audio"; src: string }) => void;
 };
 
 const MAX_RECORD_SECONDS = 15;
@@ -10,9 +12,10 @@ const RING_RADIUS = 42;
 const RING_STROKE = 4;
 const RING_CIRCUMFERENCE = 2 * Math.PI * RING_RADIUS;
 
-export default function HootItScreen({ onBack, onSubmit }: Props) {
-  const [mode, setMode] = useState<"photo" | "video">("photo");
-  const [captured, setCaptured] = useState<string | null>(null);
+export default function HootItScreen({ onBack, onSubmit, challenge }: Props) {
+  const [mode, setMode] = useState<"photo" | "video">(
+    (challenge.submission_type.find((t) => t !== "audio") as "photo" | "video") ?? "photo"
+  ); const [captured, setCaptured] = useState<string | null>(null);
   const [capturedType, setCapturedType] = useState<"photo" | "video">("photo");
   const [isRecording, setIsRecording] = useState(false);
   const [elapsedMs, setElapsedMs] = useState(0);
@@ -80,7 +83,7 @@ export default function HootItScreen({ onBack, onSubmit }: Props) {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isRecording]);
-  
+
   useEffect(() => {
     if (capturedType === "video" && previewVideoRef.current) {
       previewVideoRef.current.srcObject = null;
@@ -91,9 +94,25 @@ export default function HootItScreen({ onBack, onSubmit }: Props) {
   function handleGallery(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file) return;
+
+    const fileKind: "photo" | "video" | "audio" | null = file.type.startsWith("image")
+      ? "photo"
+      : file.type.startsWith("video")
+        ? "video"
+        : file.type.startsWith("audio")
+          ? "audio"
+          : null;
+
+    if (!fileKind || !challenge.submission_type.includes(fileKind)) {
+      toast.error(
+        `This challenge only accepts: ${challenge.submission_type.join(", ")}`
+      );
+      e.target.value = "";
+      return;
+    }
+
     const url = URL.createObjectURL(file);
-    const isVideo = file.type.startsWith("video");
-    setCapturedType(isVideo ? "video" : "photo");
+    setCapturedType(fileKind as "photo" | "video");
     setCaptured(url);
   }
 
@@ -235,6 +254,16 @@ export default function HootItScreen({ onBack, onSubmit }: Props) {
     );
   }
 
+  const MIME_MAP: Record<"photo" | "video" | "audio", string> = {
+    photo: "image/*",
+    video: "video/*",
+    audio: "audio/*",
+  };
+
+  const acceptString = challenge.submission_type
+    .map((t) => MIME_MAP[t])
+    .join(",");
+
   return (
     <div style={{ minHeight: "100dvh", background: "#F9F9F9", display: "flex", flexDirection: "column" }}>
       <div style={{ flex: 1, position: "relative", background: "#F9F9F9", overflow: "hidden", display: "flex" }}>
@@ -296,7 +325,7 @@ export default function HootItScreen({ onBack, onSubmit }: Props) {
 
       <div style={{ background: "#FFFFFF", padding: "24px 32px 40px" }}>
         <div style={{ display: "flex", justifyContent: "center", gap: 24, marginBottom: 28 }}>
-          {(["photo", "video"] as const).map((m) => (
+          {challenge.submission_type.map((m) => (
             <button
               key={m}
               onClick={() => !isRecording && setMode(m)}
@@ -325,7 +354,7 @@ export default function HootItScreen({ onBack, onSubmit }: Props) {
           >
             🖼️
           </button>
-          <input ref={fileRef} type="file" accept="image/*,video/*" style={{ display: "none" }} onChange={handleGallery} />
+          <input ref={fileRef} type="file" accept={acceptString} style={{ display: "none" }} onChange={handleGallery} />
 
           {/* Shutter with progress ring */}
           <div style={{ position: "relative", width: 92, height: 92, display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -363,8 +392,8 @@ export default function HootItScreen({ onBack, onSubmit }: Props) {
               disabled={permissionState !== "granted"}
               style={{
                 width: 76, height: 76, borderRadius: "50%",
-                background: isRecording ? "#EF4444" : "#fff",
-                border: "4px solid rgba(255,255,255,0.3)",
+                background: isRecording ? "#EF4444" : "#1e1e1e",
+                border: "4px solid rgb(127,127,127,0.3)",
                 boxShadow: isRecording ? "0 0 24px rgba(239,68,68,0.5)" : "0 0 20px rgba(255,255,255,0.2)",
                 transition: "all 0.15s", transform: isRecording ? "scale(0.92)" : "scale(1)",
                 display: "flex", alignItems: "center", justifyContent: "center",

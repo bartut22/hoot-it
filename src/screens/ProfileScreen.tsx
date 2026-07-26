@@ -101,7 +101,7 @@ export default function ProfileScreen({
 
   return (
     <div className="screen">
-      <div style={{ padding: "56px 20px 8px", background: "linear-gradient(180deg, #f9f9f9 0%, #f1f0fa 100%)" }}>
+      <div style={{ padding: "56px 24px 8px", background: "linear-gradient(180deg, #f9f9f9 0%, #f1f0fa 100%)" }}>
         <style>{`
           @keyframes shimmer {
             0% { background-position: 200% 0; }
@@ -109,7 +109,7 @@ export default function ProfileScreen({
           }
         `}</style>
 
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 20 }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
             {stacked && (
               <button
@@ -128,7 +128,16 @@ export default function ProfileScreen({
                 <ChevronLeftIcon size={18} strokeWidth={2.25} />
               </button>
             )}
-            <h1 style={{ fontSize: 22, fontWeight: 800, color: "#2D2843", letterSpacing: "-0.01em" }}>
+            <h1
+              style={{
+                fontSize: 32,
+                fontWeight: 800,
+                color: "#6666AA",
+                letterSpacing: "-0.02em",
+                fontFamily: "DM Serif Text, serif",
+                fontStyle: "italic",
+              }}
+            >
               Profile
             </h1>
           </div>
