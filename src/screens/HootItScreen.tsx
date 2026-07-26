@@ -28,6 +28,7 @@ export default function HootItScreen({ onBack, onSubmit }: Props) {
   const chunksRef = useRef<Blob[]>([]);
   const startTimeRef = useRef<number>(0);
   const tickRef = useRef<number | null>(null);
+  const previewVideoRef = useRef<HTMLVideoElement>(null);
 
   const startCamera = useCallback(async () => {
     setPermissionState("requesting");
@@ -79,6 +80,13 @@ export default function HootItScreen({ onBack, onSubmit }: Props) {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isRecording]);
+  
+  useEffect(() => {
+    if (capturedType === "video" && previewVideoRef.current) {
+      previewVideoRef.current.srcObject = null;
+      previewVideoRef.current.load();
+    }
+  }, [captured, capturedType]);
 
   function handleGallery(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
@@ -132,8 +140,10 @@ export default function HootItScreen({ onBack, onSubmit }: Props) {
     recorder.onstop = () => {
       const blob = new Blob(chunksRef.current, { type: mimeType });
       const url = URL.createObjectURL(blob);
-      setCapturedType("video");
-      setCaptured(url);
+      setTimeout(() => {
+        setCapturedType("video");
+        setCaptured(url);
+      }, 300);
     };
 
     recorder.start();
@@ -173,17 +183,18 @@ export default function HootItScreen({ onBack, onSubmit }: Props) {
   if (captured) {
     return (
       <div style={{ minHeight: "100dvh", background: "#000", display: "flex", flexDirection: "column" }}>
-        <div style={{ flex: 1, position: "relative" }}>
+        <div style={{ flex: 1, position: "relative", display: "flex", minHeight: "100%" }}>
           {capturedType === "video" ? (
             <video
+              ref={previewVideoRef}
               src={captured}
               controls
-              autoPlay
               loop
-              style={{ width: "100%", height: "100%", objectFit: "cover", minHeight: 480 }}
+              playsInline
+              style={{ width: "100%", height: "100%", objectFit: "cover", alignSelf: "center" }}
             />
           ) : (
-            <img src={captured} alt="Captured" style={{ width: "100%", minHeight: 480, objectFit: "cover" }} />
+            <img src={captured} alt="Captured" style={{ width: "100%", objectFit: "cover", alignSelf: "center" }} />
           )}
 
           <button
@@ -226,7 +237,7 @@ export default function HootItScreen({ onBack, onSubmit }: Props) {
 
   return (
     <div style={{ minHeight: "100dvh", background: "#000", display: "flex", flexDirection: "column" }}>
-      <div style={{ flex: 1, position: "relative", background: "#0A0A14", overflow: "hidden" }}>
+      <div style={{ flex: 1, position: "relative", background: "#0A0A14", overflow: "hidden", display: "flex" }}>
         <video
           ref={videoRef}
           playsInline
@@ -237,6 +248,7 @@ export default function HootItScreen({ onBack, onSubmit }: Props) {
             objectFit: "cover",
             transform: facingMode === "user" ? "scaleX(-1)" : "none",
             display: permissionState === "granted" ? "block" : "none",
+            alignSelf: "center"
           }}
         />
         <canvas ref={canvasRef} style={{ display: "none" }} />

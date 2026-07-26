@@ -19,6 +19,20 @@ import {
   HourglassIcon,
 } from "@/components/icons";
 
+const collegeColors: Record<string, { backgroundColor: string; textColor: string }> = {
+  "Baker": { backgroundColor: "#8f2513", textColor: "#f8b80f" }, //
+  "Will Rice": { backgroundColor: "#a63a26", textColor: "#f1cb48" }, //
+  "Hanszen": { backgroundColor: "#1992cb", textColor: "#eee933" }, //
+  "Wiess": { backgroundColor: "#FFCC33", textColor: "#000000" }, //
+  "Jones": { backgroundColor: "#13b5e9", textColor: "#01ab4f" }, //
+  "Brown": { backgroundColor: "#01ab4f", textColor: "#68085d" }, //
+  "Lovett": { backgroundColor: "#022553", textColor: "#fadb05" }, // 
+  "Sid Richardson": { backgroundColor: "#e64b37", textColor: "#fec526" }, //
+  "Martel": { backgroundColor: "#1292d3", textColor: "#FFFFFF" }, //
+  "McMurtry": { backgroundColor: "#49176d", textColor: "#bec0c2" }, // 
+  "Duncan": { backgroundColor: "#36451c", textColor: "#d6a234" }, //
+};
+
 type Props = {
   isOwn?: boolean;
   userId?: string;
@@ -180,13 +194,13 @@ export default function ProfileScreen({
                   <div
                     onClick={goToCollegeLeaderboard}
                     style={{
-                      background: "rgba(79,127,250,0.10)",
+                      background: collegeColors[getCollegeName(profile.college_id)]?.backgroundColor || "rgba(79,127,250,0.10)",
                       border: "1px solid rgba(79,127,250,0.25)",
                       borderRadius: 6,
                       padding: "3px 10px",
                       fontSize: 12,
                       fontWeight: 600,
-                      color: "#4F7FFA",
+                      color: collegeColors[getCollegeName(profile.college_id)]?.textColor || "#4F7FFA",
                       fontFamily: "Outfit, sans-serif",
                       cursor: "pointer",
                       display: "flex",

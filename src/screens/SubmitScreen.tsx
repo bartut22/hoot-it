@@ -140,7 +140,7 @@ export default function SubmitScreen({ media, challengeName, challengeId, onBack
           <div style={{ fontSize: 11, color: "#6666AA", textAlign: "right", marginTop: 4 }}>{caption.length}/200</div>
         </div>
 
-        <div style={{ marginBottom: 24 }}>
+        {/* <div style={{ marginBottom: 24 }}>
           <label style={{ fontSize: 13, fontWeight: 600, color: "#9999CC", fontFamily: "Outfit, sans-serif", display: "block", marginBottom: 8, letterSpacing: "0.04em", textTransform: "uppercase" }}>
             Tag Friends
           </label>
@@ -177,7 +177,7 @@ export default function SubmitScreen({ media, challengeName, challengeId, onBack
               ))}
             </div>
           )}
-        </div>
+        </div> */}
 
         {submitError && (
           <p style={{ color: "#EF4444", fontSize: 13, marginTop: -8, marginBottom: 12 }}>{submitError}</p>

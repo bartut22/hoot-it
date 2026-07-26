@@ -22,6 +22,7 @@ export default function AdminScreen() {
       .from("submissions")
       .update({
         verified: verdict === "approved",
+        rejected: verdict === "rejected",
         pending: false,
         reviewed_by: userData.user?.id,
         reviewed_at: new Date().toISOString(),
@@ -127,7 +128,7 @@ export default function AdminScreen() {
                     </div>
 
                     <p style={{ fontSize: 14, color: "#9999CC", fontFamily: "DM Sans, sans-serif", lineHeight: 1.5 }}>
-                      "{item.caption}"
+                      {item.caption}
                     </p>
                   </div>
 

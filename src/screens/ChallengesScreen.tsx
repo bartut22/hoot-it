@@ -14,7 +14,13 @@ import {
   MapIcon,
   BookIcon,
   UsersIcon,
+  ImageIcon,
+  CameraIcon,
+  ErrorTriangleIcon,
+  VideoIcon,
+  AudioIcon,
 } from "@/components/icons";
+import ReactMarkdown from 'react-markdown';
 
 type Props = { onHootIt: (challengeId: number) => void };
 
@@ -33,6 +39,12 @@ const categoryIcon: Record<string, typeof SparklesIcon> = {
   exploration: MapIcon,
   academic: BookIcon,
   social: UsersIcon,
+};
+
+const submissionIcon: Record<string, typeof ImageIcon> = {
+  photo: ImageIcon,
+  video: VideoIcon,
+  audio: AudioIcon
 };
 
 function formatDeadline(value: string) {
@@ -188,7 +200,7 @@ export default function ChallengesScreen({ onHootIt }: Props) {
         ) : (
           filtered.map((challenge) => {
             const pts = pointsColor(challenge.points);
-            const CategoryIcon = categoryIcon[challenge.category] ?? SparklesIcon;
+            const CategoryIcon = categoryIcon[challenge.category] ?? ErrorTriangleIcon;
 
             return (
               <div
@@ -223,6 +235,26 @@ export default function ChallengesScreen({ onHootIt }: Props) {
                       <h3 style={{ fontSize: 17, fontWeight: 700, color: "#2D2843", letterSpacing: "-0.01em" }}>
                         {challenge.name}
                       </h3>
+                      <div
+                        style={{
+                          width: "auto",
+                          height: 32,
+                          borderRadius: 9,
+                          background: "#F2F1FB",
+                          color: "#6666AA",
+                          display: "flex",
+                          padding: "0 4px",
+                          gap: 4,
+                          alignItems: "center",
+                          justifyContent: "center",
+                          flexShrink: 0,
+                        }}
+                      >
+                        {challenge.submission_type.map((type) => {
+                          const Icon = submissionIcon[type] ?? ErrorTriangleIcon;
+                          return <Icon key={type} size={17} ariaLabel={type} />;
+                        })}
+                      </div>
                     </div>
 
                     <div
@@ -243,10 +275,10 @@ export default function ChallengesScreen({ onHootIt }: Props) {
                     </div>
                   </div>
 
-                  <p style={{ fontSize: 14, color: "#7A7AB5", lineHeight: 1.55, fontFamily: "DM Sans, sans-serif" }}>
-                    {challenge.description}
-                  </p>
-
+                  <div style={{ fontSize: 14, color: "#7A7AB5", lineHeight: 1.55, fontFamily: "DM Sans, sans-serif" }}>
+                    <ReactMarkdown>{challenge.description}</ReactMarkdown>
+                  </div>
+                  
                   <div style={{ display: "flex", alignItems: "center", gap: 6, marginTop: 12, color: "#8A8AC0" }}>
                     <ClockIcon size={13} strokeWidth={1.75} />
                     <span style={{ fontSize: 12, color: "#6666AA", fontFamily: "DM Sans, sans-serif" }}>

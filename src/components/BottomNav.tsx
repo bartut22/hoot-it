@@ -24,7 +24,7 @@ export default function BottomNav({ active, onChange }: BottomNavProps) {
         left: "50%",
         transform: "translateX(-50%)",
         width: "100%",
-        maxWidth: 430,
+        // maxWidth: 430,
         background: "rgba(255,255,255,0.92)",
         backdropFilter: "blur(20px)",
         borderTop: "1px solid #E6E4F5",
@@ -82,19 +82,6 @@ export default function BottomNav({ active, onChange }: BottomNavProps) {
             >
               {label}
             </span>
-            {isActive && (
-              <div
-                style={{
-                  position: "absolute",
-                  top: 4,
-                  right: "32%",
-                  width: 5,
-                  height: 5,
-                  borderRadius: "50%",
-                  background: "#F5A623",
-                }}
-              />
-            )}
           </button>
         );
       })}

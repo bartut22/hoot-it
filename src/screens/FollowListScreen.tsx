@@ -84,33 +84,35 @@ export default function FollowListScreen({
   }, [handle, kind]);
 
   return (
-    <div className="screen" style={{ background: "#04040E", minHeight: "100vh" }}>
+    <div className="screen">
       <div
         style={{
           padding: "56px 20px 16px",
-          background: "linear-gradient(180deg, #0C0C1E 0%, #04040E 100%)",
-          borderBottom: "1px solid #1E1E3E",
+          background: "linear-gradient(180deg, #f9f9f9 0%, #f1f0fa 100%)",
+          borderBottom: "1px solid #e6e4f5",
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           <button
             onClick={() => navigate(-1)}
+            className="tap"
             style={{
               width: 36,
               height: 36,
               borderRadius: 18,
-              background: "#131328",
-              border: "1px solid #2A2A50",
-              color: "#F0F0FF",
+              background: "#ffffff",
+              border: "1px solid #e6e4f5",
+              color: "#2d2843",
               fontSize: 16,
               fontWeight: 700,
+              boxShadow: "var(--shadow)",
             }}
           >
             ←
           </button>
 
           <div>
-            <div style={{ fontSize: 20, fontWeight: 800, color: "#F0F0FF", fontFamily: "Outfit, sans-serif" }}>
+            <div style={{ fontSize: 20, fontWeight: 800, color: "#2d2843", fontFamily: "Outfit, sans-serif" }}>
               {kind === "followers" ? "Followers" : "Following"}
             </div>
             <div style={{ fontSize: 12, color: "#6666AA" }}>@{titleHandle}</div>
@@ -139,10 +141,11 @@ export default function FollowListScreen({
                   gap: 12,
                   width: "100%",
                   padding: 12,
-                  background: "#0C0C1E",
-                  border: "1px solid #1E1E3E",
+                  background: "#ffffff",
+                  border: "1px solid #e6e4f5",
                   borderRadius: 14,
                   textAlign: "left",
+                  boxShadow: "var(--shadow)",
                 }}
               >
                 <img
@@ -151,7 +154,7 @@ export default function FollowListScreen({
                   style={{ width: 44, height: 44, borderRadius: "50%", objectFit: "cover", flexShrink: 0 }}
                 />
                 <div>
-                  <div style={{ fontSize: 15, fontWeight: 700, color: "#F0F0FF" }}>{user.display_name}</div>
+                  <div style={{ fontSize: 15, fontWeight: 700, color: "#2d2843" }}>{user.display_name}</div>
                   <div style={{ fontSize: 13, color: "#6666AA" }}>@{user.handle}</div>
                 </div>
               </button>
