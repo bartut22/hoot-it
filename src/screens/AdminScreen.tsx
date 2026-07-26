@@ -35,14 +35,14 @@ export default function AdminScreen() {
   }
 
   return (
-    <div style={{ minHeight: "100dvh", background: "#04040E" }}>
+    <div style={{ minHeight: "100dvh", background: "#F9F9F9" }}>
       {/* Header */}
-      <div style={{ padding: "56px 24px 20px", background: "#0C0C1E", borderBottom: "1px solid #1E1E3E" }}>
+      <div style={{ padding: "56px 24px 20px", background: "#FFFFFF", borderBottom: "1px solid #E6E4F5" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 4 }}>
           <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#22C55E", boxShadow: "0 0 8px #22C55E" }} />
           <span style={{ fontSize: 12, fontWeight: 600, color: "#22C55E", fontFamily: "Outfit, sans-serif", letterSpacing: "0.06em", textTransform: "uppercase" }}>Admin</span>
         </div>
-        <h1 style={{ fontSize: 26, fontWeight: 800, color: "#F0F0FF", letterSpacing: "-0.02em" }}>Review Queue</h1>
+        <h1 style={{ fontSize: 26, fontWeight: 800, color: "#2D2843", letterSpacing: "-0.02em" }}>Review Queue</h1>
         <p style={{ fontSize: 13, color: "#6666AA", marginTop: 4, fontFamily: "DM Sans, sans-serif" }}>
           {queue.length} pending · Verify or reject submissions
         </p>
@@ -52,7 +52,7 @@ export default function AdminScreen() {
         {queue.length === 0 ? (
           <div style={{ textAlign: "center", padding: "80px 24px" }}>
             <div style={{ fontSize: 56, marginBottom: 16 }}>🎉</div>
-            <h2 style={{ fontSize: 22, fontWeight: 800, color: "#F0F0FF", marginBottom: 8, fontFamily: "Outfit, sans-serif" }}>All caught up!</h2>
+            <h2 style={{ fontSize: 22, fontWeight: 800, color: "#2D2843", marginBottom: 8, fontFamily: "Outfit, sans-serif" }}>All caught up!</h2>
             <p style={{ fontSize: 15, color: "#6666AA", fontFamily: "DM Sans, sans-serif" }}>No more submissions to review.</p>
           </div>
         ) : (
@@ -63,8 +63,8 @@ export default function AdminScreen() {
                 <div
                   key={item.id}
                   style={{
-                    background: "#0C0C1E",
-                    border: `1px solid ${verdict === "approved" ? "rgba(34,197,94,0.4)" : verdict === "rejected" ? "rgba(239,68,68,0.4)" : "#1E1E3E"}`,
+                    background: "#FFFFFF",
+                    border: `1px solid ${verdict === "approved" ? "rgba(34,197,94,0.4)" : verdict === "rejected" ? "rgba(239,68,68,0.4)" : "#E6E4F5"}`,
                     borderRadius: 20,
                     overflow: "hidden",
                     transition: "all 0.3s ease",
@@ -82,7 +82,7 @@ export default function AdminScreen() {
                           playsInline
                           style={{ width: "100%", height: 220, objectFit: "cover", background: "#000" }}
                         />
-                        <div style={{ position: "absolute", top: 10, left: 10, background: "rgba(0,0,0,0.7)", borderRadius: 6, padding: "3px 8px", fontSize: 11, fontWeight: 700, color: "#F0F0FF", fontFamily: "Outfit, sans-serif", pointerEvents: "none" }}>
+                        <div style={{ position: "absolute", top: 10, left: 10, background: "rgba(0,0,0,0.7)", borderRadius: 6, padding: "3px 8px", fontSize: 11, fontWeight: 700, color: "#2D2843", fontFamily: "Outfit, sans-serif", pointerEvents: "none" }}>
                           VIDEO
                         </div>
                       </div>
@@ -112,7 +112,7 @@ export default function AdminScreen() {
                   <div style={{ padding: "16px 16px 0" }}>
                     <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 8 }}>
                       <div>
-                        <span style={{ fontSize: 15, fontWeight: 700, color: "#F0F0FF", fontFamily: "Outfit, sans-serif" }}>{item.user}</span>
+                        <span style={{ fontSize: 15, fontWeight: 700, color: "#2D2843", fontFamily: "Outfit, sans-serif" }}>{item.user}</span>
                         <span style={{ fontSize: 13, color: "#6666AA", marginLeft: 8 }}>{item.college}</span>
                       </div>
                       <span style={{ fontSize: 12, color: "#6666AA", fontFamily: "DM Sans, sans-serif" }}>{item.submitted}</span>

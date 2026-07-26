@@ -149,14 +149,14 @@ function MainApp({ session, modal, setModal, CHALLENGES }: any) {
             onClick={() => setModal({ kind: "none" })}
             style={{
               pointerEvents: "all",
-              background: "rgba(13,13,22,0.92)",
+              background: "rgba(255,255,255,0.95)",
               backdropFilter: "blur(12px)",
-              border: "1px solid #2A2A50",
+              border: "1px solid #D7D7EC",
               borderRadius: 20,
               padding: "8px 16px",
               fontSize: 13,
               fontWeight: 700,
-              color: "#F0F0FF",
+              color: "#2D2843",
               fontFamily: "Outfit, sans-serif",
               cursor: "pointer",
             }}
@@ -202,9 +202,9 @@ function MainApp({ session, modal, setModal, CHALLENGES }: any) {
         <button
           onClick={() => setModal({ kind: "admin" })}
           style={{
-            background: "rgba(13,13,22,0.85)",
+            background: "rgba(255,255,255,0.92)",
             backdropFilter: "blur(12px)",
-            border: "1px solid #2A2A50",
+            border: "1px solid #D7D7EC",
             borderRadius: 20,
             padding: "7px 14px",
             fontSize: 12,
@@ -248,7 +248,7 @@ function MainApp({ session, modal, setModal, CHALLENGES }: any) {
             width: "100%",
             // maxWidth: "430px",
             zIndex: 400,
-            background: "#04040E",
+            background: "#F9F9F9",
             overflowY: "auto",
           }}
         >

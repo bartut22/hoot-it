@@ -358,7 +358,7 @@ export default function Post({
           style={{
             position: "relative",
             cursor: canOpenPost ? "pointer" : "default",
-            background: "#0C0C1E",
+            background: "#FFFFFF",
           }}
         >
           {mediaType === "video" ? (
@@ -400,7 +400,7 @@ export default function Post({
                 padding: "4px 10px",
                 fontSize: 11,
                 fontWeight: 700,
-                color: "#0C0C1E",
+                color: "#FFFFFF",
                 fontFamily: "Outfit, sans-serif",
               }}
             >

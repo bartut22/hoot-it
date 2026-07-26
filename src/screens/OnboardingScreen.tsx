@@ -54,8 +54,8 @@ export default function OnboardingScreen({ session }: { session: any }) {
 
     console.log({ displayName, handle, available, checking, collegeId, submitting, canSubmit });
     return (
-        <div className="screen" style={{ padding: "56px 24px", background: "linear-gradient(180deg, #0C0C1E 0%, #04040E 100%)", minHeight: "100vh" }}>
-            <h1 style={{ fontSize: 26, fontWeight: 800, color: "#F0F0FF", marginBottom: 8, fontFamily: "Outfit, sans-serif" }}>
+        <div className="screen" style={{ padding: "56px 24px", background: "linear-gradient(180deg, #FFFFFF 0%, #F9F9F9 100%)", minHeight: "100vh" }}>
+            <h1 style={{ fontSize: 26, fontWeight: 800, color: "#2D2843", marginBottom: 8, fontFamily: "Outfit, sans-serif" }}>
                 Set up your profile
             </h1>
             <p style={{ fontSize: 14, color: "#6666AA", marginBottom: 28 }}>
@@ -67,7 +67,7 @@ export default function OnboardingScreen({ session }: { session: any }) {
                 value={displayName}
                 onChange={(e) => setDisplayName(e.target.value)}
                 placeholder="Your name"
-                style={{ width: "100%", padding: "12px 14px", borderRadius: 10, background: "#0C0C1E", border: "1px solid #1E1E3E", color: "#F0F0FF", fontSize: 15, marginBottom: 20 }}
+                style={{ width: "100%", padding: "12px 14px", borderRadius: 10, background: "#FFFFFF", border: "1px solid #E6E4F5", color: "#2D2843", fontSize: 15, marginBottom: 20 }}
             />
 
             <label style={{ fontSize: 13, fontWeight: 600, color: "#9999CC", display: "block", marginBottom: 6 }}>Username</label>
@@ -75,7 +75,7 @@ export default function OnboardingScreen({ session }: { session: any }) {
                 value={handle}
                 onChange={(e) => setHandle(e.target.value.toLowerCase().replace(/[^a-z0-9_]/g, ""))}
                 placeholder="username"
-                style={{ width: "100%", padding: "12px 14px", borderRadius: 10, background: "#0C0C1E", border: `1px solid ${available === false ? "#E5484D" : available === true ? "#3DD68C" : "#1E1E3E"}`, color: "#F0F0FF", fontSize: 15, marginBottom: 6 }}
+                style={{ width: "100%", padding: "12px 14px", borderRadius: 10, background: "#FFFFFF", border: `1px solid ${available === false ? "#E5484D" : available === true ? "#3DD68C" : "#E6E4F5"}`, color: "#2D2843", fontSize: 15, marginBottom: 6 }}
             />
             <div style={{ fontSize: 12, marginBottom: 20, color: available === false ? "#E5484D" : available === true ? "#3DD68C" : "#6666AA" }}>
                 {handle.length > 0 && handle.length < 3 && "Must be at least 3 characters"}
@@ -88,7 +88,7 @@ export default function OnboardingScreen({ session }: { session: any }) {
             <select
                 value={collegeId ?? ""}
                 onChange={(e) => setCollegeId(Number(e.target.value))}
-                style={{ width: "100%", padding: "12px 14px", borderRadius: 10, background: "#0C0C1E", border: "1px solid #1E1E3E", color: "#F0F0FF", fontSize: 15, marginBottom: 28 }}
+                style={{ width: "100%", padding: "12px 14px", borderRadius: 10, background: "#FFFFFF", border: "1px solid #E6E4F5", color: "#2D2843", fontSize: 15, marginBottom: 28 }}
             >
                 <option value="" disabled>Select your college</option>
                 {Object.entries(COLLEGES).map(([id, c]: any) => (
@@ -103,8 +103,8 @@ export default function OnboardingScreen({ session }: { session: any }) {
                     width: "100%",
                     padding: "14px",
                     borderRadius: 12,
-                    background: canSubmit ? "#F5A623" : "#1E1E3E",
-                    color: canSubmit ? "#0C0C1E" : "#6666AA",
+                    background: canSubmit ? "#F5A623" : "#E6E4F5",
+                    color: canSubmit ? "#FFFFFF" : "#6666AA",
                     fontWeight: 800,
                     fontSize: 15,
                     border: "none",
