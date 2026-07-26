@@ -6,7 +6,6 @@ import {
   TrophyIcon,
   ClockIcon,
   CheckIcon,
-  OwlIcon,
   SparklesIcon,
   DumbbellIcon,
   BrainIcon,
@@ -15,11 +14,10 @@ import {
   BookIcon,
   UsersIcon,
   ImageIcon,
-  CameraIcon,
   ErrorTriangleIcon,
   VideoIcon,
   AudioIcon,
-} from "@/components/icons";
+} from "@/components/Icons";
 import ReactMarkdown from 'react-markdown';
 
 type Props = { onHootIt: (challengeId: number) => void };

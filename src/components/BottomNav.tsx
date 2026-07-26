@@ -1,4 +1,4 @@
-import { TrophyIcon, CompassIcon, OwlIcon, UserIcon, TrendUpIcon } from "./icons";
+import { TrophyIcon, CompassIcon, OwlIcon, UserIcon, TrendUpIcon } from "./Icons";
 
 type Tab = "leaderboard" | "feed" | "challenges" | "profile" | "progress";
 

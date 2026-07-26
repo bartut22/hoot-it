@@ -7,7 +7,7 @@ import { useCollegeAvgDone } from "@/hooks/useCollegeAvgDone";
 import { useSchoolAvgDone } from "@/hooks/useSchoolAvgDone";
 import { getCollegeName } from "@/lib/colleges";
 import { useMaxPossiblePoints } from "@/hooks/useMaxPossiblePoints";
-import { GemIcon, MedalIcon, TrophyIcon } from "@/components/icons";
+import { GemIcon, MedalIcon, TrophyIcon } from "@/components/Icons";
 
 const RANKS = [
   { name: "Bronze", Icon: MedalIcon, min: 0, max: 499, color: "#B0703A", bg: "rgba(205,127,50,0.10)", border: "rgba(205,127,50,0.25)" },

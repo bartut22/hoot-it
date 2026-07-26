@@ -17,7 +17,7 @@ import {
   ArrowUpRightIcon,
   CheckIcon,
   HourglassIcon,
-} from "@/components/icons";
+} from "@/components/Icons";
 
 const collegeColors: Record<string, { backgroundColor: string; textColor: string }> = {
   "Baker": { backgroundColor: "#8f2513", textColor: "#f8b80f" }, //
