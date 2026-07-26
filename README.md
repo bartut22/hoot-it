@@ -1,6 +1,6 @@
-# Hoot It
+# OwlQuest
 
-Hoot It is a React + Vite social challenge app for college communities. Users sign in through Supabase, complete timed challenges, submit photo or video evidence, and track progress through a college-based leaderboard, social feed, and profile system.
+OwlQuest (formerly Hoot It) is a React + Vite social challenge app for college communities. Users sign in through Supabase, complete timed challenges, submit photo or video evidence, and track progress through a college-based leaderboard, social feed, and profile system.
 
 ## What It Does
 
