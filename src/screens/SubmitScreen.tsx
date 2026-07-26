@@ -100,12 +100,12 @@ export default function SubmitScreen({ media, challengeName, challengeId, onBack
   }
 
   return (
-    <div style={{ minHeight: "100dvh", background: "#04040E", display: "flex", flexDirection: "column" }}>
-      <div style={{ display: "flex", alignItems: "center", gap: 16, padding: "56px 20px 20px", background: "#0C0C1E", borderBottom: "1px solid #1E1E3E" }}>
-        <button onClick={onBack} style={{ width: 36, height: 36, borderRadius: "50%", background: "#1A1A35", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 16, color: "#F0F0FF", flexShrink: 0 }}>
+    <div style={{ minHeight: "100dvh", background: "#F9F9F9", display: "flex", flexDirection: "column" }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 16, padding: "56px 20px 20px", background: "#FFFFFF", borderBottom: "1px solid #E6E4F5" }}>
+        <button onClick={onBack} style={{ width: 36, height: 36, borderRadius: "50%", background: "#F2F1FB", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 16, color: "#2D2843", flexShrink: 0 }}>
           ‹
         </button>
-        <h2 style={{ fontSize: 18, fontWeight: 700, color: "#F0F0FF", letterSpacing: "-0.01em" }}>Submit Hoot</h2>
+        <h2 style={{ fontSize: 18, fontWeight: 700, color: "#2D2843", letterSpacing: "-0.01em" }}>Submit Hoot</h2>
       </div>
 
       <div style={{ flex: 1, overflowY: "auto", padding: "20px 20px 120px" }}>
@@ -133,8 +133,8 @@ export default function SubmitScreen({ media, challengeName, challengeId, onBack
             placeholder="Add a caption..."
             maxLength={200}
             style={{
-              width: "100%", background: "#0C0C1E", border: "1px solid #1E1E3E", borderRadius: 14,
-              padding: "14px 16px", fontSize: 15, color: "#F0F0FF", resize: "none", height: 96, lineHeight: 1.5,
+              width: "100%", background: "#FFFFFF", border: "1px solid #E6E4F5", borderRadius: 14,
+              padding: "14px 16px", fontSize: 15, color: "#2D2843", resize: "none", height: 96, lineHeight: 1.5,
             }}
           />
           <div style={{ fontSize: 11, color: "#6666AA", textAlign: "right", marginTop: 4 }}>{caption.length}/200</div>
@@ -160,16 +160,16 @@ export default function SubmitScreen({ media, challengeName, challengeId, onBack
             value={tagInput}
             onChange={(e) => setTagInput(e.target.value)}
             placeholder="Search friends..."
-            style={{ width: "100%", background: "#0C0C1E", border: "1px solid #1E1E3E", borderRadius: 12, padding: "12px 16px", fontSize: 15, color: "#F0F0FF" }}
+            style={{ width: "100%", background: "#FFFFFF", border: "1px solid #E6E4F5", borderRadius: 12, padding: "12px 16px", fontSize: 15, color: "#2D2843" }}
           />
 
           {suggestions.length > 0 && (
-            <div style={{ background: "#0C0C1E", border: "1px solid #1E1E3E", borderRadius: 12, marginTop: 4, overflow: "hidden" }}>
+            <div style={{ background: "#FFFFFF", border: "1px solid #E6E4F5", borderRadius: 12, marginTop: 4, overflow: "hidden" }}>
               {suggestions.map((s) => (
                 <button
                   key={s}
                   onClick={() => toggleTag(s)}
-                  style={{ width: "100%", padding: "12px 16px", textAlign: "left", fontSize: 14, color: "#F0F0FF", fontFamily: "DM Sans, sans-serif", borderBottom: "1px solid #1A1A35", display: "flex", alignItems: "center", gap: 10 }}
+                  style={{ width: "100%", padding: "12px 16px", textAlign: "left", fontSize: 14, color: "#2D2843", fontFamily: "DM Sans, sans-serif", borderBottom: "1px solid #F2F1FB", display: "flex", alignItems: "center", gap: 10 }}
                 >
                   <span style={{ fontSize: 12, color: "#6666AA" }}>@{s.split(" ")[0].toLowerCase()}</span>
                   <span>{s}</span>
@@ -184,7 +184,7 @@ export default function SubmitScreen({ media, challengeName, challengeId, onBack
         )}
       </div>
 
-      <div style={{ position: "fixed", bottom: 0, left: "50%", transform: "translateX(-50%)", width: "100%", maxWidth: 430, padding: "16px 20px 36px", background: "linear-gradient(0deg, #04040E 60%, transparent)", zIndex: 10 }}>
+      <div style={{ position: "fixed", bottom: 0, left: "50%", transform: "translateX(-50%)", width: "100%", maxWidth: 430, padding: "16px 20px 36px", background: "linear-gradient(0deg, #F9F9F9 60%, transparent)", zIndex: 10 }}>
         <button
           onClick={handleSubmit}
           disabled={submitting}
@@ -205,11 +205,11 @@ export default function SubmitScreen({ media, challengeName, challengeId, onBack
           onClick={() => { setShowModal(false); onDone(); }}
         >
           <div
-            style={{ background: "#0C0C1E", border: "1px solid #1E1E3E", borderRadius: "24px 24px 0 0", padding: "32px 28px 52px", width: "100%", maxWidth: 430, textAlign: "center" }}
+            style={{ background: "#FFFFFF", border: "1px solid #E6E4F5", borderRadius: "24px 24px 0 0", padding: "32px 28px 52px", width: "100%", maxWidth: 430, textAlign: "center" }}
             onClick={(e) => e.stopPropagation()}
           >
             <div style={{ fontSize: 56, marginBottom: 16 }}>🦉</div>
-            <h2 style={{ fontSize: 24, fontWeight: 800, color: "#F0F0FF", marginBottom: 10, letterSpacing: "-0.02em" }}>
+            <h2 style={{ fontSize: 24, fontWeight: 800, color: "#2D2843", marginBottom: 10, letterSpacing: "-0.02em" }}>
               Hoot submitted!
             </h2>
             <p style={{ fontSize: 15, color: "#9999CC", lineHeight: 1.6, marginBottom: 28, fontFamily: "DM Sans, sans-serif" }}>

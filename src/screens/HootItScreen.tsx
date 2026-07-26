@@ -201,7 +201,7 @@ export default function HootItScreen({ onBack, onSubmit }: Props) {
             onClick={onBack}
             style={{
               position: "absolute", top: 56, left: 20, width: 40, height: 40, borderRadius: "50%",
-              background: "rgba(0,0,0,0.5)", backdropFilter: "blur(8px)", display: "flex",
+              background: "rgba(45,40,67,0.16)", backdropFilter: "blur(8px)", display: "flex",
               alignItems: "center", justifyContent: "center", fontSize: 18, color: "#fff",
             }}
           >
@@ -209,12 +209,12 @@ export default function HootItScreen({ onBack, onSubmit }: Props) {
           </button>
         </div>
 
-        <div style={{ padding: "24px", background: "#0C0C1E", display: "flex", gap: 12 }}>
+        <div style={{ padding: "24px", background: "#FFFFFF", display: "flex", gap: 12 }}>
           <button
             onClick={handleRetake}
             style={{
-              flex: 1, padding: "16px", background: "#1A1A35", border: "1px solid #2A2A50",
-              borderRadius: 14, fontSize: 15, fontWeight: 700, color: "#F0F0FF",
+              flex: 1, padding: "16px", background: "#F2F1FB", border: "1px solid #D7D7EC",
+              borderRadius: 14, fontSize: 15, fontWeight: 700, color: "#2D2843",
             }}
           >
             Retake
@@ -236,8 +236,8 @@ export default function HootItScreen({ onBack, onSubmit }: Props) {
   }
 
   return (
-    <div style={{ minHeight: "100dvh", background: "#000", display: "flex", flexDirection: "column" }}>
-      <div style={{ flex: 1, position: "relative", background: "#0A0A14", overflow: "hidden", display: "flex" }}>
+    <div style={{ minHeight: "100dvh", background: "#F9F9F9", display: "flex", flexDirection: "column" }}>
+      <div style={{ flex: 1, position: "relative", background: "#F9F9F9", overflow: "hidden", display: "flex" }}>
         <video
           ref={videoRef}
           playsInline
@@ -256,7 +256,7 @@ export default function HootItScreen({ onBack, onSubmit }: Props) {
         {permissionState !== "granted" && (
           <div style={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)", textAlign: "center", padding: 24 }}>
             <div style={{ fontSize: 48, marginBottom: 8 }}>📷</div>
-            <p style={{ fontSize: 13, color: "rgba(255,255,255,0.6)", fontFamily: "DM Sans, sans-serif" }}>
+            <p style={{ fontSize: 13, color: "#6666AA", fontFamily: "DM Sans, sans-serif" }}>
               {permissionState === "requesting" && "Requesting camera access..."}
               {permissionState === "denied" && (cameraError || "Camera access denied. Check permissions.")}
               {permissionState === "idle" && "Starting camera..."}
@@ -281,20 +281,20 @@ export default function HootItScreen({ onBack, onSubmit }: Props) {
 
         <button
           onClick={onBack}
-          style={{ position: "absolute", top: 56, left: 20, width: 40, height: 40, borderRadius: "50%", background: "rgba(0,0,0,0.5)", backdropFilter: "blur(8px)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18, color: "#fff" }}
+          style={{ position: "absolute", top: 56, left: 20, width: 40, height: 40, borderRadius: "50%", background: "rgba(45,40,67,0.16)", backdropFilter: "blur(8px)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18, color: "#2D2843" }}
         >
           ✕
         </button>
 
         <button
           onClick={flipCamera}
-          style={{ position: "absolute", top: 56, right: 20, width: 40, height: 40, borderRadius: "50%", background: "rgba(0,0,0,0.5)", backdropFilter: "blur(8px)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18, color: "#fff" }}
+          style={{ position: "absolute", top: 56, right: 20, width: 40, height: 40, borderRadius: "50%", background: "rgba(45,40,67,0.16)", backdropFilter: "blur(8px)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18, color: "#2D2843" }}
         >
           🔄
         </button>
       </div>
 
-      <div style={{ background: "#0C0C1E", padding: "24px 32px 40px" }}>
+      <div style={{ background: "#FFFFFF", padding: "24px 32px 40px" }}>
         <div style={{ display: "flex", justifyContent: "center", gap: 24, marginBottom: 28 }}>
           {(["photo", "video"] as const).map((m) => (
             <button
@@ -303,7 +303,7 @@ export default function HootItScreen({ onBack, onSubmit }: Props) {
               disabled={isRecording}
               style={{
                 fontSize: 13, fontWeight: 700, fontFamily: "Outfit, sans-serif",
-                color: mode === m ? "#F0F0FF" : "#6666AA", letterSpacing: "0.08em",
+                color: mode === m ? "#2D2843" : "#6666AA", letterSpacing: "0.08em",
                 textTransform: "uppercase", borderBottom: mode === m ? "2px solid #4F7FFA" : "2px solid transparent",
                 paddingBottom: 4, transition: "all 0.15s", opacity: isRecording ? 0.4 : 1,
               }}
@@ -318,8 +318,8 @@ export default function HootItScreen({ onBack, onSubmit }: Props) {
             onClick={() => fileRef.current?.click()}
             disabled={isRecording}
             style={{
-              width: 52, height: 52, borderRadius: 12, background: "#1A1A35",
-              border: "1px solid #2A2A50", display: "flex", alignItems: "center",
+              width: 52, height: 52, borderRadius: 12, background: "#F2F1FB",
+              border: "1px solid #D7D7EC", display: "flex", alignItems: "center",
               justifyContent: "center", fontSize: 22, opacity: isRecording ? 0.4 : 1,
             }}
           >

@@ -96,7 +96,7 @@ export default function LoginScreen() {
     return (
       <div style={{ minHeight: '100dvh', display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: 24 }}>
         <div style={{ width: '100%', maxWidth: 340 }}>
-          <h2 style={{ color: '#F0F0FF', fontSize: 22, marginBottom: 8 }}>Check your email 📬</h2>
+          <h2 style={{ color: '#2D2843', fontSize: 22, marginBottom: 8 }}>Check your email 📬</h2>
           <p style={{ color: '#9999CC', marginBottom: 24 }}>
             Enter the 6-digit code we sent to {email}
           </p>
@@ -120,7 +120,7 @@ export default function LoginScreen() {
 
   return (
     <div style={{ minHeight: '100dvh', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: 24, gap: 12 }}>
-      <h1 style={{ color: '#F0F0FF', fontSize: 26, marginBottom: 12 }}>
+      <h1 style={{ color: '#2D2843', fontSize: 26, marginBottom: 12 }}>
         {mode === 'signup' ? 'Sign up to Hoot It' : 'Log in to Hoot It'}
       </h1>
 
@@ -129,8 +129,8 @@ export default function LoginScreen() {
           <input type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} style={inputStyle} required />
           <input placeholder="Your Name" value={displayName} onChange={e => setDisplayName(e.target.value)} style={inputStyle} required />
           <div style={inputStyle}>
-            <span style={{ color: '#F0F0FF', userSelect: 'none' }}>@</span>
-            <input placeholder="Handle" value={handle} onChange={e => setHandle(e.target.value)} style={{ background: 'transparent', border: 'none', color: '#F0F0FF' }} required />
+            <span style={{ color: '#2D2843', userSelect: 'none' }}>@</span>
+            <input placeholder="Handle" value={handle} onChange={e => setHandle(e.target.value)} style={{ background: 'transparent', border: 'none', color: '#2D2843' }} required />
           </div>
           <select value={collegeId} onChange={e => setCollegeId(e.target.value)} style={inputStyle} required>
             <option value="-1">Select your college</option>
@@ -173,5 +173,5 @@ export default function LoginScreen() {
   )
 }
 
-const inputStyle = { background: '#0C0C1E', border: '1px solid #1E1E3E', borderRadius: 12, padding: '14px 16px', color: '#F0F0FF' }
+const inputStyle = { background: '#FFFFFF', border: '1px solid #E6E4F5', borderRadius: 12, padding: '14px 16px', color: '#2D2843' }
 const btnStyle = { padding: 16, background: 'linear-gradient(135deg, #4F7FFA 0%, #8B5CF6 100%)', borderRadius: 14, color: '#fff', fontWeight: 700 }

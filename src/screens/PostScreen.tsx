@@ -20,7 +20,7 @@ export default function PostScreen({ stacked = false }: Props) {
   if (!post) {
     return (
       <div className="screen">
-        <div style={{ padding: "56px 20px 0", background: "linear-gradient(180deg, #0C0C1E 0%, #04040E 100%)" }}>
+        <div style={{ padding: "56px 20px 0", background: "linear-gradient(180deg, #FFFFFF 0%, #F9F9F9 100%)" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 20 }}>
             {stacked && (
               <button
@@ -29,9 +29,9 @@ export default function PostScreen({ stacked = false }: Props) {
                   width: 36,
                   height: 36,
                   borderRadius: 18,
-                  background: "#131328",
-                  border: "1px solid #2A2A50",
-                  color: "#F0F0FF",
+                  background: "#F2F1FB",
+                  border: "1px solid #D7D7EC",
+                  color: "#2D2843",
                   fontSize: 16,
                   fontWeight: 700,
                 }}
@@ -39,7 +39,7 @@ export default function PostScreen({ stacked = false }: Props) {
                 ←
               </button>
             )}
-            <h1 style={{ fontSize: 22, fontWeight: 800, color: "#F0F0FF", letterSpacing: "-0.01em" }}>
+            <h1 style={{ fontSize: 22, fontWeight: 800, color: "#2D2843", letterSpacing: "-0.01em" }}>
               Post
             </h1>
           </div>
@@ -54,7 +54,7 @@ export default function PostScreen({ stacked = false }: Props) {
 
   return (
     <div className="screen">
-      <div style={{ padding: "56px 20px 16px", background: "linear-gradient(180deg, #0C0C1E 0%, #04040E 100%)" }}>
+      <div style={{ padding: "56px 20px 16px", background: "linear-gradient(180deg, #FFFFFF 0%, #F9F9F9 100%)" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           {stacked && (
             <button
@@ -63,9 +63,9 @@ export default function PostScreen({ stacked = false }: Props) {
                 width: 36,
                 height: 36,
                 borderRadius: 18,
-                background: "#131328",
-                border: "1px solid #2A2A50",
-                color: "#F0F0FF",
+                background: "#F2F1FB",
+                border: "1px solid #D7D7EC",
+                color: "#2D2843",
                 fontSize: 16,
                 fontWeight: 700,
               }}
@@ -73,13 +73,13 @@ export default function PostScreen({ stacked = false }: Props) {
               ←
             </button>
           )}
-          <h1 style={{ fontSize: 22, fontWeight: 800, color: "#F0F0FF", letterSpacing: "-0.01em" }}>
+          <h1 style={{ fontSize: 22, fontWeight: 800, color: "#2D2843", letterSpacing: "-0.01em" }}>
             Post
           </h1>
         </div>
       </div>
 
-      <div style={{ background: "#1E1E3E", paddingTop: 1 }}>
+      <div style={{ background: "#E6E4F5", paddingTop: 1 }}>
         <Post
           post={post}
           currentUserId={userId}

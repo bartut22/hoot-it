@@ -407,7 +407,7 @@ export default function ProfileScreen({
                           display: "flex",
                           alignItems: "center",
                           justifyContent: "center",
-                          background: "rgba(0,0,0,0.25)",
+                          background: "rgba(45,40,67,0.12)",
                         }}
                       >
                         <div
@@ -422,7 +422,7 @@ export default function ProfileScreen({
                             justifyContent: "center",
                           }}
                         >
-                          <span style={{ fontSize: 12, marginLeft: 2, color: "#fff" }}>▶</span>
+                          <span style={{ fontSize: 12, marginLeft: 2, color: "#2D2843" }}>▶</span>
                         </div>
                       </div>
                     </div>
@@ -435,7 +435,7 @@ export default function ProfileScreen({
                       position: "absolute",
                       bottom: 6,
                       left: 6,
-                      background: "rgba(0,0,0,0.65)",
+                      background: "rgba(45,40,67,0.2)",
                       borderRadius: 6,
                       padding: "2px 7px",
                       display: "flex",

@@ -215,7 +215,7 @@ export default function ProfileSettings() {
                 ← Back to profile
             </button>
 
-            <h1 style={{ fontSize: 24, fontWeight: 800, color: "#F0F0FF", marginBottom: 24, fontFamily: "Outfit, sans-serif" }}>
+            <h1 style={{ fontSize: 24, fontWeight: 800, color: "#2D2843", marginBottom: 24, fontFamily: "Outfit, sans-serif" }}>
                 Profile Settings
             </h1>
 
@@ -225,8 +225,8 @@ export default function ProfileSettings() {
                         width: 96,
                         height: 96,
                         borderRadius: "50%",
-                        background: avatarUrl ? `url(${avatarUrl}) center/cover` : "#131328",
-                        border: "1px solid #2A2A50",
+                        background: avatarUrl ? `url(${avatarUrl}) center/cover` : "#F2F1FB",
+                        border: "1px solid #D7D7EC",
                         marginBottom: 12,
                     }}
                 />
@@ -309,10 +309,10 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
 const inputStyle: React.CSSProperties = {
     width: "100%",
     padding: "12px 14px",
-    background: "#0C0C1E",
-    border: "1px solid #1E1E3E",
+    background: "#FFFFFF",
+    border: "1px solid #E6E4F5",
     borderRadius: 10,
-    color: "#F0F0FF",
+    color: "#2D2843",
     fontSize: 15,
     fontFamily: "DM Sans, sans-serif",
     boxSizing: "border-box",

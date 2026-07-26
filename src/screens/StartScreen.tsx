@@ -94,8 +94,7 @@ export default function StartScreen({ userId, onStartNow }: { userId?: string; o
         padding: "48px 24px",
         position: "relative",
         overflow: "hidden",
-        // gradient between 151222 and 2D2843
-        background: "linear-gradient(30deg, #151222 0%, #2D2843 100%)",
+        background: "linear-gradient(30deg, #F9F9F9 0%, #F1F0FA 100%)",
         fontFamily: "DM Serif Text, serif"
       }}
     >
@@ -259,7 +258,7 @@ export default function StartScreen({ userId, onStartNow }: { userId?: string; o
                     });
                   }}
                   style={{
-                    backgroundColor: '#2D2843',
+                    backgroundColor: '#4F7FFA',
                     color: 'white',
                     fontWeight: 300,
                     fontSize: "1.1rem",
