@@ -7,13 +7,10 @@ export default function CollegeTabs({ allTabs, tab, setTab }: any) {
 
   useEffect(() => {
     const el = scrollRef.current
-    if (!el) {
-      console.log('scrollRef.current is null!') // add this to confirm
-      return
-    }
+    if (!el) return
     el.addEventListener('wheel', handleWheel, { passive: true })
     return () => el.removeEventListener('wheel', handleWheel)
-  }, [handleWheel]) 
+  }, [handleWheel])
 
   return (
     <div style={{ position: 'relative' }}>
@@ -29,9 +26,9 @@ export default function CollegeTabs({ allTabs, tab, setTab }: any) {
                 fontSize: 13,
                 fontWeight: 600,
                 fontFamily: "Outfit, sans-serif",
-                background: tab === t ? "#4F7FFA" : "#131328",
-                color: tab === t ? "#fff" : "#6666AA",
-                border: tab === t ? "none" : "1px solid #1E1E3E",
+                background: tab === t ? "#6666AA" : "#D7D7EC",
+                color: tab === t ? "#fff" : "#3E3E67",
+                border: "1px solid #D7D7EC",
                 transition: "all 0.15s",
               }}>
             {t}
@@ -46,17 +43,17 @@ export default function CollegeTabs({ allTabs, tab, setTab }: any) {
             bottom: -8,
             left: '50%',
             transform: 'translateX(-50%)',
-            background: 'rgba(20,20,40,0.95)',
+            background: 'rgba(30,28,50,0.95)',
             color: '#F0F0FF',
             fontSize: 12,
             fontWeight: 600,
             padding: '8px 14px',
             borderRadius: 20,
-            border: '1px solid #2A2A50',
+            border: '1px solid rgba(255,255,255,0.1)',
             whiteSpace: 'nowrap',
             zIndex: 100,
             fontFamily: 'DM Sans, sans-serif',
-            boxShadow: '0 4px 16px rgba(0,0,0,0.3)',
+            boxShadow: '0 8px 24px rgba(45,40,67,0.25)',
           }}
         >
           💡 Tip: hold Shift while scrolling to move sideways

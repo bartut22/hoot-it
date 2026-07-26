@@ -11,6 +11,13 @@ import { useTotalPossiblePoints } from "@/hooks/useTotalPossiblePoints";
 import { supabase } from "@/lib/supabase";
 import { useFollowStatus } from "@/hooks/useFollowStatus";
 import { toBackgroundLocation } from "@/lib/router";
+import {
+  ChevronLeftIcon,
+  ShieldIcon,
+  ArrowUpRightIcon,
+  CheckIcon,
+  HourglassIcon,
+} from "@/components/icons";
 
 type Props = {
   isOwn?: boolean;
@@ -80,7 +87,7 @@ export default function ProfileScreen({
 
   return (
     <div className="screen">
-      <div style={{ padding: "56px 20px 0", background: "linear-gradient(180deg, #0C0C1E 0%, #04040E 100%)" }}>
+      <div style={{ padding: "56px 20px 8px", background: "linear-gradient(180deg, #f9f9f9 0%, #f1f0fa 100%)" }}>
         <style>{`
           @keyframes shimmer {
             0% { background-position: 200% 0; }
@@ -93,21 +100,21 @@ export default function ProfileScreen({
             {stacked && (
               <button
                 onClick={() => navigate(-1)}
+                className={"tap"}
                 style={{
                   width: 36,
                   height: 36,
                   borderRadius: 18,
-                  background: "#131328",
-                  border: "1px solid #2A2A50",
-                  color: "#F0F0FF",
-                  fontSize: 16,
-                  fontWeight: 700,
+                  background: "#F2F1FB",
+                  border: "1px solid #E6E4F5",
+                  color: "#2D2843",
+                  display: "flex", alignItems: "center", justifyContent: "center"
                 }}
               >
-                ←
+                <ChevronLeftIcon size={18} strokeWidth={2.25} />
               </button>
             )}
-            <h1 style={{ fontSize: 22, fontWeight: 800, color: "#F0F0FF", letterSpacing: "-0.01em" }}>
+            <h1 style={{ fontSize: 22, fontWeight: 800, color: "#2D2843", letterSpacing: "-0.01em" }}>
               Profile
             </h1>
           </div>
@@ -129,6 +136,7 @@ export default function ProfileScreen({
                   color: "#fff",
                   fontFamily: "Outfit, sans-serif",
                   flexShrink: 0,
+                  boxShadow: "var(--shadow)",
                 }}
               >
                 <img
@@ -139,61 +147,46 @@ export default function ProfileScreen({
               </div>
 
               <div style={{ display: "flex", flexDirection: "column" }}>
-                <div style={{ fontSize: 20, fontWeight: 800, color: "#F0F0FF", fontFamily: "Outfit, sans-serif", letterSpacing: "-0.01em" }}>
+                <div style={{ fontSize: 20, fontWeight: 800, color: "#2D2843", fontFamily: "Outfit, sans-serif", letterSpacing: "-0.01em", display: "flex", gap: 8, alignItems: "center" }}>
                   {profile.display_name}
+                  {profile.is_admin && (
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 3,
+                        background: "rgba(245,166,35,0.15)",
+                        border: "1px solid rgba(245,166,35,0.35)",
+                        borderRadius: 6,
+                        padding: "2px 7px",
+                        fontSize: 10,
+                        fontWeight: 700,
+                        color: "#B4780F",
+                        fontFamily: "Outfit, sans-serif",
+                        letterSpacing: "0.03em",
+                        textTransform: "uppercase",
+                      }}
+                    >
+                      <span style={{ display: "flex", alignItems: "center", gap: 4 }}>
+                        <ShieldIcon size={11} strokeWidth={2} /> Admin
+                      </span>
+                    </div>
+                  )}
                 </div>
-
-                {profile.is_admin && (
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      alignSelf: "flex-start",
-                      gap: 3,
-                      background: "rgba(245,166,35,0.15)",
-                      border: "1px solid rgba(245,166,35,0.35)",
-                      borderRadius: 6,
-                      padding: "2px 7px",
-                      fontSize: 10,
-                      fontWeight: 700,
-                      color: "#F5A623",
-                      fontFamily: "Outfit, sans-serif",
-                      letterSpacing: "0.03em",
-                      textTransform: "uppercase",
-                    }}
-                  >
-                    🛡️ Admin
-                  </div>
-                )}
 
                 <div style={{ fontSize: 13, color: "#6666AA" }}>@{profile.handle}</div>
 
                 <div style={{ display: "flex", alignItems: "center", gap: 6, marginTop: 6 }}>
                   <div
-                    style={{
-                      background: "rgba(79,127,250,0.12)",
-                      border: "1px solid rgba(79,127,250,0.22)",
-                      borderRadius: 6,
-                      padding: "3px 10px",
-                      fontSize: 12,
-                      fontWeight: 600,
-                      color: "#6B95FF",
-                      fontFamily: "Outfit, sans-serif",
-                    }}
-                  >
-                    {getCollegeName(profile.college_id)}
-                  </div>
-
-                  <button
                     onClick={goToCollegeLeaderboard}
                     style={{
-                      background: "rgba(245,166,35,0.12)",
-                      border: "1px solid rgba(245,166,35,0.22)",
+                      background: "rgba(79,127,250,0.10)",
+                      border: "1px solid rgba(79,127,250,0.25)",
                       borderRadius: 6,
                       padding: "3px 10px",
                       fontSize: 12,
                       fontWeight: 600,
-                      color: "#F5A623",
+                      color: "#4F7FFA",
                       fontFamily: "Outfit, sans-serif",
                       cursor: "pointer",
                       display: "flex",
@@ -201,23 +194,20 @@ export default function ProfileScreen({
                       gap: 3,
                     }}
                   >
-                    College #{collegeRank}
-                    {collegeRank === 1 ? " 🥇" : collegeRank === 2 ? " 🥈" : collegeRank === 3 ? " 🥉" : ""}
-                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" style={{ marginLeft: 1, opacity: 0.6 }}>
-                      <path d="M7 17L17 7M17 7H10M17 7V14" stroke="#F5A623" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </button>
+                    {getCollegeName(profile.college_id)} #{collegeRank}
+                    <ArrowUpRightIcon size={10} strokeWidth={2.25} className="opacity-60" />
+                  </div>
 
                   <button
                     onClick={goToOverallLeaderboard}
                     style={{
-                      background: "rgba(79,127,250,0.12)",
-                      border: "1px solid rgba(79,127,250,0.22)",
+                      background: "rgba(79,127,250,0.10)",
+                      border: "1px solid rgba(79,127,250,0.25)",
                       borderRadius: 6,
                       padding: "3px 10px",
                       fontSize: 12,
                       fontWeight: 600,
-                      color: "#6B95FF",
+                      color: "#4F7FFA",
                       fontFamily: "Outfit, sans-serif",
                       cursor: "pointer",
                       display: "flex",
@@ -226,18 +216,19 @@ export default function ProfileScreen({
                     }}
                   >
                     Rice #{overallRank}
-                    {overallRank === 1 ? " 🥇" : overallRank === 2 ? " 🥈" : overallRank === 3 ? " 🥉" : ""}
+                    <ArrowUpRightIcon size={10} strokeWidth={2.25} className="opacity-60" />
+                    {/* {overallRank === 1 ? " 🥇" : overallRank === 2 ? " 🥈" : overallRank === 3 ? " 🥉" : ""}
                     <svg width="10" height="10" viewBox="0 0 24 24" fill="none" style={{ marginLeft: 1, opacity: 0.6 }}>
-                      <path d="M7 17L17 7M17 7H10M17 7V14" stroke="#6B95FF" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
+                      <path d="M7 17L17 7M17 7H10M17 7V14" stroke="#4F7FFA" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg> */}
                   </button>
                 </div>
               </div>
             </div>
 
-            <div style={{ display: "flex", gap: 1, background: "#1E1E3E", borderRadius: 16, overflow: "hidden", marginBottom: 20 }}>
-              <div style={{ flex: 1, background: "#0C0C1E", padding: "14px 8px", textAlign: "center" }}>
-                <div style={{ fontSize: 18, fontWeight: 800, color: "#F0F0FF", fontFamily: "Outfit, sans-serif" }}>
+            <div style={{ display: "flex", gap: 1, background: "#ECEAF9", borderRadius: 16, overflow: "hidden", marginBottom: 20, boxShadow: "var(--shadow)" }}>
+              <div style={{ flex: 1, background: "#FFFFFF", padding: "14px 8px", textAlign: "center" }}>
+                <div style={{ fontSize: 18, fontWeight: 800, color: "#2D2843", fontFamily: "Outfit, sans-serif" }}>
                   {pointsFromSubmissions}
                 </div>
                 <div style={{ fontSize: 11, color: "#6666AA", marginTop: 2, fontFamily: "DM Sans, sans-serif" }}>
@@ -245,8 +236,8 @@ export default function ProfileScreen({
                 </div>
               </div>
 
-              <div style={{ flex: 1, background: "#0C0C1E", padding: "14px 8px", textAlign: "center" }}>
-                <div style={{ fontSize: 18, fontWeight: 800, color: "#F0F0FF", fontFamily: "Outfit, sans-serif" }}>
+              <div style={{ flex: 1, background: "#FFFFFF", padding: "14px 8px", textAlign: "center" }}>
+                <div style={{ fontSize: 18, fontWeight: 800, color: "#2D2843", fontFamily: "Outfit, sans-serif" }}>
                   {completionPct.toFixed(0)}%
                 </div>
                 <div style={{ fontSize: 11, color: "#6666AA", marginTop: 2, fontFamily: "DM Sans, sans-serif" }}>
@@ -256,9 +247,9 @@ export default function ProfileScreen({
 
               <button
                 onClick={() => openFollowStack("followers")}
-                style={{ flex: 1, background: "#0C0C1E", padding: "14px 8px", textAlign: "center", border: "none" }}
+                style={{ flex: 1, background: "#FFFFFF", padding: "14px 8px", textAlign: "center", border: "none" }}
               >
-                <div style={{ fontSize: 18, fontWeight: 800, color: "#F0F0FF", fontFamily: "Outfit, sans-serif" }}>
+                <div style={{ fontSize: 18, fontWeight: 800, color: "#2D2843", fontFamily: "Outfit, sans-serif" }}>
                   {followers}
                 </div>
                 <div style={{ fontSize: 11, color: "#6666AA", marginTop: 2, fontFamily: "DM Sans, sans-serif" }}>
@@ -268,9 +259,9 @@ export default function ProfileScreen({
 
               <button
                 onClick={() => openFollowStack("following")}
-                style={{ flex: 1, background: "#0C0C1E", padding: "14px 8px", textAlign: "center", border: "none" }}
+                style={{ flex: 1, background: "#FFFFFF", padding: "14px 8px", textAlign: "center", border: "none" }}
               >
-                <div style={{ fontSize: 18, fontWeight: 800, color: "#F0F0FF", fontFamily: "Outfit, sans-serif" }}>
+                <div style={{ fontSize: 18, fontWeight: 800, color: "#2D2843", fontFamily: "Outfit, sans-serif" }}>
                   {following}
                 </div>
                 <div style={{ fontSize: 11, color: "#6666AA", marginTop: 2, fontFamily: "DM Sans, sans-serif" }}>
@@ -283,18 +274,21 @@ export default function ProfileScreen({
               <div style={{ display: "flex", gap: 10, marginBottom: 20 }}>
                 <button
                   onClick={() => navigate("/settings")}
-                  style={{ flex: 1, padding: "12px", background: "#131328", border: "1px solid #2A2A50", borderRadius: 12, fontSize: 14, fontWeight: 600, color: "#F0F0FF", fontFamily: "Outfit, sans-serif" }}
+                  className={"tap"}
+                  style={{ flex: 1, padding: "12px", background: "#F2F1FB", border: "1px solid #E6E4F5", borderRadius: 12, fontSize: 14, fontWeight: 600, color: "#2D2843", fontFamily: "Outfit, sans-serif" }}
                 >
                   Edit Profile
                 </button>
                 <button
-                  style={{ flex: 1, padding: "12px", background: "#131328", border: "1px solid #2A2A50", borderRadius: 12, fontSize: 14, fontWeight: 600, color: "#F0F0FF", fontFamily: "Outfit, sans-serif" }}
+                  className={"tap"}
+                  style={{ flex: 1, padding: "12px", background: "#F2F1FB", border: "1px solid #E6E4F5", borderRadius: 12, fontSize: 14, fontWeight: 600, color: "#2D2843", fontFamily: "Outfit, sans-serif" }}
                 >
                   Share Profile
                 </button>
                 <button
                   onClick={handleLogout}
-                  style={{ flex: 1, padding: "12px", background: "rgba(229,72,77,0.1)", border: "1px solid rgba(229,72,77,0.3)", borderRadius: 12, fontSize: 14, fontWeight: 600, color: "#E5484D", fontFamily: "Outfit, sans-serif" }}
+                  className={"tap"}
+                  style={{ flex: 1, padding: "12px", background: "rgba(229,72,77,0.08)", border: "1px solid rgba(229,72,77,0.25)", borderRadius: 12, fontSize: 14, fontWeight: 600, color: "#E5484D", fontFamily: "Outfit, sans-serif" }}
                 >
                   Log Out
                 </button>
@@ -302,17 +296,18 @@ export default function ProfileScreen({
             ) : (
               <div style={{ display: "flex", gap: 10, marginBottom: 20 }}>
                 <button
+                  className={"tap"}
                   onClick={isFollowing ? unfollow : follow}
                   disabled={followLoading}
                   style={{
                     flex: 1,
                     padding: "12px",
-                    background: isFollowing ? "#131328" : "#F5A623",
-                    border: isFollowing ? "1px solid #2A2A50" : "1px solid #F5A623",
+                    background: isFollowing ? "#F2F1FB" : "#F5A623",
+                    border: isFollowing ? "1px solid #E6E4F5" : "1px solid #F5A623",
                     borderRadius: 12,
                     fontSize: 14,
                     fontWeight: 700,
-                    color: isFollowing ? "#F0F0FF" : "#0C0C1E",
+                    color: isFollowing ? "#2D2843" : "#FFFFFF",
                     fontFamily: "Outfit, sans-serif",
                     cursor: followLoading ? "not-allowed" : "pointer",
                     opacity: followLoading ? 0.6 : 1,
@@ -340,9 +335,9 @@ export default function ProfileScreen({
               </div>
             </div>
 
-            <div style={{ display: "flex", gap: 1, background: "#1E1E3E", borderRadius: 16, overflow: "hidden", marginBottom: 20 }}>
+            <div style={{ display: "flex", gap: 1, background: "#ECEAF9", borderRadius: 16, overflow: "hidden", marginBottom: 20 }}>
               {Array.from({ length: 4 }).map((_, i) => (
-                <div key={i} style={{ flex: 1, background: "#0C0C1E", padding: "14px 8px", display: "flex", flexDirection: "column", alignItems: "center", gap: 6 }}>
+                <div key={i} style={{ flex: 1, background: "#FFFFFF", padding: "14px 8px", display: "flex", flexDirection: "column", alignItems: "center", gap: 6 }}>
                   <SkeletonBox width={28} height={18} />
                   <div style={{ height: 4 }} />
                   <SkeletonBox width={44} height={11} />
@@ -360,7 +355,7 @@ export default function ProfileScreen({
 
       <div style={{ padding: "8px 0 0" }}>
         <div style={{ padding: "0 16px 12px" }}>
-          <span style={{ fontSize: 13, fontWeight: 600, color: "#9999CC", fontFamily: "Outfit, sans-serif", letterSpacing: "0.06em", textTransform: "uppercase" }}>
+          <span style={{ fontSize: 13, fontWeight: 600, color: "#8A8AC0", fontFamily: "Outfit, sans-serif", letterSpacing: "0.06em", textTransform: "uppercase" }}>
             Hoots
           </span>
         </div>
@@ -406,7 +401,7 @@ export default function ProfileScreen({
                             width: 32,
                             height: 32,
                             borderRadius: "50%",
-                            background: "rgba(255,255,255,0.2)",
+                            background: "rgba(255,255,255,0.3)",
                             backdropFilter: "blur(6px)",
                             display: "flex",
                             alignItems: "center",
@@ -421,14 +416,12 @@ export default function ProfileScreen({
                     <img src={post.image} alt="Post" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
                   )}
 
-                  <div style={{ position: "absolute", inset: 0, background: "rgba(0,0,0,0.2)" }} />
-
                   <div
                     style={{
                       position: "absolute",
                       bottom: 6,
                       left: 6,
-                      background: "rgba(0,0,0,0.7)",
+                      background: "rgba(0,0,0,0.65)",
                       borderRadius: 6,
                       padding: "2px 7px",
                       display: "flex",
@@ -457,7 +450,7 @@ export default function ProfileScreen({
                         fontSize: 10,
                       }}
                     >
-                      ✓
+                      <CheckIcon size={11} strokeWidth={2.5} />
                     </div>
                   ) : (
                     <div
@@ -475,14 +468,14 @@ export default function ProfileScreen({
                         fontSize: 10,
                       }}
                     >
-                      ⏳
+                      <HourglassIcon size={10} strokeWidth={2.5} />
                     </div>
                   )}
                 </button>
               ))}
 
               {Array.from({ length: Math.max(0, 6 - profile.posts.length) }).map((_, i) => (
-                <div key={`empty-${i}`} style={{ aspectRatio: "1", background: "#0C0C1E", border: "1px solid #1A1A35" }} />
+                <div key={`empty-${i}`} style={{ aspectRatio: "1", background: "#F7F6FC", border: "1px solid #ECEAF9" }} />
               ))}
             </>
           )}

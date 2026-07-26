@@ -2,24 +2,37 @@ import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useChallenges } from "@/hooks/useChallenges";
 import { toBackgroundLocation } from "@/lib/router";
+import {
+  TrophyIcon,
+  ClockIcon,
+  CheckIcon,
+  OwlIcon,
+  SparklesIcon,
+  DumbbellIcon,
+  BrainIcon,
+  PaletteIcon,
+  MapIcon,
+  BookIcon,
+  UsersIcon,
+} from "@/components/icons";
 
 type Props = { onHootIt: (challengeId: number) => void };
 
 function pointsColor(pts: number): { bg: string; text: string; border: string } {
-  if (pts >= 400) return { bg: "rgba(239,68,68,0.12)", text: "#EF4444", border: "rgba(239,68,68,0.25)" };
-  if (pts >= 250) return { bg: "rgba(245,166,35,0.12)", text: "#F5A623", border: "rgba(245,166,35,0.25)" };
-  if (pts >= 150) return { bg: "rgba(79,127,250,0.12)", text: "#4F7FFA", border: "rgba(79,127,250,0.25)" };
-  return { bg: "rgba(34,197,94,0.12)", text: "#22C55E", border: "rgba(34,197,94,0.25)" };
+  if (pts >= 400) return { bg: "rgba(239,68,68,0.08)", text: "#EF4444", border: "rgba(239,68,68,0.22)" };
+  if (pts >= 250) return { bg: "rgba(245,166,35,0.10)", text: "#F5A623", border: "rgba(245,166,35,0.25)" };
+  if (pts >= 150) return { bg: "rgba(79,127,250,0.08)", text: "#4F7FFA", border: "rgba(79,127,250,0.22)" };
+  return { bg: "rgba(34,197,94,0.08)", text: "#22C55E", border: "rgba(34,197,94,0.22)" };
 }
 
-const categoryIcon: Record<string, string> = {
-  performance: "🎭",
-  physical: "💪",
-  knowledge: "🧠",
-  creative: "🎨",
-  exploration: "🗺️",
-  academic: "📚",
-  social: "🤝",
+const categoryIcon: Record<string, typeof SparklesIcon> = {
+  performance: SparklesIcon,
+  physical: DumbbellIcon,
+  knowledge: BrainIcon,
+  creative: PaletteIcon,
+  exploration: MapIcon,
+  academic: BookIcon,
+  social: UsersIcon,
 };
 
 function formatDeadline(value: string) {
@@ -44,10 +57,7 @@ export default function ChallengesScreen({ onHootIt }: Props) {
   const openChallenges = CHALLENGES.filter((c) => !c.completed);
   const doneChallenges = CHALLENGES.filter((c) => c.completed);
 
-  const filtered =
-    filter === "done"
-      ? doneChallenges
-      : openChallenges;
+  const filtered = filter === "done" ? doneChallenges : openChallenges;
 
   const totalPoints = doneChallenges.reduce((sum, c) => sum + (c.points ?? 0), 0);
   const done = doneChallenges.length;
@@ -62,8 +72,18 @@ export default function ChallengesScreen({ onHootIt }: Props) {
 
   return (
     <div className="screen">
-      <div style={{ padding: "56px 24px 0", background: "linear-gradient(180deg, #0C0C1E 0%, #04040E 100%)" }}>
-        <h1 style={{ fontSize: 28, fontWeight: 800, color: "#F0F0FF", letterSpacing: "-0.02em", marginBottom: 4 }}>
+      <div style={{ padding: "56px 24px 16px", background: "linear-gradient(180deg, #f9f9f9 0%, #f1f0fa 100%)" }}>
+        <h1
+          style={{
+            fontSize: 32,
+            fontWeight: 800,
+            color: "#6666AA",
+            letterSpacing: "-0.02em",
+            fontFamily: "DM Serif Text, serif",
+            fontStyle: "italic",
+            marginBottom: 6,
+          }}
+        >
           Challenges
         </h1>
 
@@ -71,7 +91,7 @@ export default function ChallengesScreen({ onHootIt }: Props) {
           {done} of {CHALLENGES.length} completed · {totalPoints} pts earned
         </p>
 
-        <div style={{ height: 4, background: "#1A1A35", borderRadius: 4, marginBottom: 20 }}>
+        <div style={{ height: 4, background: "#ECEAF9", borderRadius: 4, marginBottom: 20 }}>
           <div
             style={{
               height: "100%",
@@ -83,20 +103,22 @@ export default function ChallengesScreen({ onHootIt }: Props) {
           />
         </div>
 
-        <div style={{ display: "flex", gap: 8, marginBottom: 16 }}>
+        <div style={{ display: "flex", gap: 8 }}>
           {(["all", "open", "done"] as const).map((f) => (
             <button
               key={f}
               onClick={() => setFilter(f)}
+              className="tap"
               style={{
+                minHeight: 34,
                 padding: "7px 16px",
                 borderRadius: 20,
                 fontSize: 13,
                 fontWeight: 600,
                 fontFamily: "Outfit, sans-serif",
-                background: filter === f ? "#4F7FFA" : "#131328",
+                background: filter === f ? "#4F7FFA" : "#F2F1FB",
                 color: filter === f ? "#fff" : "#6666AA",
-                border: filter === f ? "none" : "1px solid #1E1E3E",
+                border: filter === f ? "none" : "1px solid #E6E4F5",
               }}
             >
               {f.charAt(0).toUpperCase() + f.slice(1)}
@@ -109,35 +131,37 @@ export default function ChallengesScreen({ onHootIt }: Props) {
         {showTrophyState ? (
           <div
             style={{
-              background: "#0C0C1E",
-              border: "1px solid rgba(245,166,35,0.22)",
-              borderRadius: 18,
-              padding: "28px 20px",
+              background: "#FFFFFF",
+              border: "1px solid rgba(245,166,35,0.25)",
+              borderRadius: "22px 18px 24px 20px",
+              padding: "32px 20px",
               textAlign: "center",
+              boxShadow: "var(--shadow)",
+              transform: "rotate(-0.4deg)",
             }}
           >
             <div
               style={{
-                width: 72,
-                height: 72,
+                width: 68,
+                height: 68,
                 margin: "0 auto 16px",
                 borderRadius: "50%",
                 background: "rgba(245,166,35,0.12)",
-                border: "1px solid rgba(245,166,35,0.22)",
+                border: "1px solid rgba(245,166,35,0.25)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                fontSize: 34,
+                color: "#D98A0E",
               }}
             >
-              🏆
+              <TrophyIcon size={30} strokeWidth={1.6} />
             </div>
 
             <h3
               style={{
                 fontSize: 20,
                 fontWeight: 800,
-                color: "#F0F0FF",
+                color: "#2D2843",
                 letterSpacing: "-0.01em",
                 marginBottom: 8,
                 fontFamily: "Outfit, sans-serif",
@@ -149,7 +173,7 @@ export default function ChallengesScreen({ onHootIt }: Props) {
             <p
               style={{
                 fontSize: 14,
-                color: "#9999CC",
+                color: "#7A7AB5",
                 lineHeight: 1.6,
                 fontFamily: "DM Sans, sans-serif",
                 maxWidth: 320,
@@ -164,23 +188,39 @@ export default function ChallengesScreen({ onHootIt }: Props) {
         ) : (
           filtered.map((challenge) => {
             const pts = pointsColor(challenge.points);
+            const CategoryIcon = categoryIcon[challenge.category] ?? SparklesIcon;
 
             return (
               <div
                 key={challenge.id}
                 style={{
-                  background: "#0C0C1E",
-                  border: `1px solid ${challenge.completed ? "rgba(34,197,94,0.2)" : "#1E1E3E"}`,
+                  background: "#FFFFFF",
+                  border: `1px solid ${challenge.completed ? "rgba(34,197,94,0.25)" : "#ECEAF9"}`,
                   borderRadius: 18,
                   overflow: "hidden",
-                  opacity: challenge.completed ? 0.82 : 1,
+                  opacity: challenge.completed ? 0.85 : 1,
+                  boxShadow: "var(--shadow)",
                 }}
               >
                 <div style={{ padding: "18px 18px 14px" }}>
                   <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", gap: 12, marginBottom: 10 }}>
                     <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                      <span style={{ fontSize: 20 }}>{categoryIcon[challenge.category] ?? "⭐"}</span>
-                      <h3 style={{ fontSize: 17, fontWeight: 700, color: "#F0F0FF", letterSpacing: "-0.01em" }}>
+                      <div
+                        style={{
+                          width: 32,
+                          height: 32,
+                          borderRadius: 9,
+                          background: "#F2F1FB",
+                          color: "#6666AA",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          flexShrink: 0,
+                        }}
+                      >
+                        <CategoryIcon size={17} />
+                      </div>
+                      <h3 style={{ fontSize: 17, fontWeight: 700, color: "#2D2843", letterSpacing: "-0.01em" }}>
                         {challenge.name}
                       </h3>
                     </div>
@@ -203,12 +243,12 @@ export default function ChallengesScreen({ onHootIt }: Props) {
                     </div>
                   </div>
 
-                  <p style={{ fontSize: 14, color: "#9999CC", lineHeight: 1.55, fontFamily: "DM Sans, sans-serif" }}>
+                  <p style={{ fontSize: 14, color: "#7A7AB5", lineHeight: 1.55, fontFamily: "DM Sans, sans-serif" }}>
                     {challenge.description}
                   </p>
 
-                  <div style={{ display: "flex", alignItems: "center", gap: 6, marginTop: 12 }}>
-                    <span style={{ fontSize: 12 }}>🕐</span>
+                  <div style={{ display: "flex", alignItems: "center", gap: 6, marginTop: 12, color: "#8A8AC0" }}>
+                    <ClockIcon size={13} strokeWidth={1.75} />
                     <span style={{ fontSize: 12, color: "#6666AA", fontFamily: "DM Sans, sans-serif" }}>
                       {formatDeadline(challenge.deadline)}
                     </span>
@@ -226,7 +266,7 @@ export default function ChallengesScreen({ onHootIt }: Props) {
                           gap: 8,
                           padding: "12px",
                           background: "rgba(34,197,94,0.08)",
-                          border: "1px solid rgba(34,197,94,0.2)",
+                          border: "1px solid rgba(34,197,94,0.22)",
                           borderRadius: 12,
                           fontSize: 14,
                           fontWeight: 700,
@@ -234,21 +274,24 @@ export default function ChallengesScreen({ onHootIt }: Props) {
                           fontFamily: "Outfit, sans-serif",
                         }}
                       >
-                        {challenge.submissionVerified ? "✓ Verified" : "✓ Submitted"}
+                        <CheckIcon size={16} strokeWidth={2.25} />
+                        {challenge.submissionVerified ? "Verified" : "Submitted"}
                       </div>
 
                       {challenge.submissionId && (
                         <button
                           onClick={() => openSubmissionPost(challenge.submissionId)}
+                          className="tap"
                           style={{
                             width: "100%",
+                            minHeight: 44,
                             padding: "12px",
-                            background: "#131328",
-                            border: "1px solid #2A2A50",
+                            background: "#F2F1FB",
+                            border: "1px solid #E6E4F5",
                             borderRadius: 12,
                             fontSize: 14,
                             fontWeight: 700,
-                            color: "#F0F0FF",
+                            color: "#2D2843",
                             fontFamily: "Outfit, sans-serif",
                           }}
                         >
@@ -259,8 +302,10 @@ export default function ChallengesScreen({ onHootIt }: Props) {
                   ) : (
                     <button
                       onClick={() => onHootIt(challenge.id)}
+                      className="tap"
                       style={{
                         width: "100%",
+                        minHeight: 48,
                         padding: "14px",
                         background: "linear-gradient(135deg, #4F7FFA 0%, #6B5CF6 100%)",
                         borderRadius: 12,
@@ -268,10 +313,14 @@ export default function ChallengesScreen({ onHootIt }: Props) {
                         fontWeight: 700,
                         color: "#fff",
                         letterSpacing: "0.01em",
-                        boxShadow: "0 4px 20px rgba(79,127,250,0.25)",
+                        boxShadow: "0 6px 20px rgba(79,127,250,0.28)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        gap: 8,
                       }}
                     >
-                      🦉 Hoot It
+                      Hoot It! 🦉
                     </button>
                   )}
                 </div>

@@ -127,6 +127,7 @@ export default function StartScreen({ userId, onStartNow }: { userId?: string; o
               background: "rgba(255, 255, 255, 0.1)",
               backdropFilter: "blur(10px)",
               margin: "20px",
+              color: "white",
               boxShadow: "0 4px 10px rgba(0, 0, 0, 0.3)",
               display: "flex",
               position: "relative",

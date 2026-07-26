@@ -43,7 +43,7 @@ export default function FeedScreen() {
 
   return (
     <div className="screen">
-      <div style={{ padding: "56px 24px 16px", background: "#f9f9f9" }}>
+      <div style={{ padding: "56px 24px 0", background: "linear-gradient(180deg, #f9f9f9 0%, #f1f0fa 100%)" }}>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <h1
             style={{
@@ -62,7 +62,7 @@ export default function FeedScreen() {
         <FeedTabs tab={tab} setTab={setTab} />
       </div>
 
-      <div style={{ display: "flex", flexDirection: "column", gap: 1 }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: 12, padding: "16px 16px 0" }}>
         {filteredPosts.map((post) => (
           <Post
             key={post.id}

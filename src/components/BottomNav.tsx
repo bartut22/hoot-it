@@ -1,3 +1,5 @@
+import { TrophyIcon, CompassIcon, OwlIcon, UserIcon, TrendUpIcon } from "./icons";
+
 type Tab = "leaderboard" | "feed" | "challenges" | "profile" | "progress";
 
 interface BottomNavProps {
@@ -5,12 +7,12 @@ interface BottomNavProps {
   onChange: (tab: Tab) => void;
 }
 
-const tabs: { id: Tab; icon: string; label: string }[] = [
-  { id: "leaderboard", icon: "🏆", label: "Board" },
-  { id: "feed", icon: "🧭", label: "Discovery" },
-  { id: "challenges", icon: "🦉", label: "Hoot It" },
-  { id: "profile", icon: "👤", label: "Me" },
-  { id: "progress", icon: "📈", label: "Progress" },
+const tabs: { id: Tab; Icon: typeof TrophyIcon; label: string }[] = [
+  { id: "leaderboard", Icon: TrophyIcon, label: "Board" },
+  { id: "feed", Icon: CompassIcon, label: "Discovery" },
+  { id: "challenges", Icon: OwlIcon, label: "Hoot It" },
+  { id: "profile", Icon: UserIcon, label: "Me" },
+  { id: "progress", Icon: TrendUpIcon, label: "Progress" },
 ];
 
 export default function BottomNav({ active, onChange }: BottomNavProps) {
@@ -23,54 +25,73 @@ export default function BottomNav({ active, onChange }: BottomNavProps) {
         transform: "translateX(-50%)",
         width: "100%",
         maxWidth: 430,
-        background: "rgba(13,13,22,0.95)",
+        background: "rgba(255,255,255,0.92)",
         backdropFilter: "blur(20px)",
-        borderTop: "1px solid var(--border)",
+        borderTop: "1px solid #E6E4F5",
         display: "flex",
         zIndex: 100,
         paddingBottom: "env(safe-area-inset-bottom, 8px)",
+        boxShadow: "0 -6px 24px rgba(45,40,67,0.05)",
       }}
     >
-      {tabs.map((tab) => {
-        const isActive = active === tab.id;
+      {tabs.map(({ id, Icon, label }) => {
+        const isActive = active === id;
         return (
           <button
-            key={tab.id}
-            onClick={() => onChange(tab.id)}
+            key={id}
+            onClick={() => onChange(id)}
+            aria-label={label}
+            aria-current={isActive ? "page" : undefined}
+            className="tap"
             style={{
               flex: 1,
+              minHeight: 52,
+              position: "relative",
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
-              gap: 2,
-              padding: "10px 4px",
-              transition: "opacity 0.15s",
-              opacity: isActive ? 1 : 0.5,
+              justifyContent: "center",
+              gap: 3,
+              padding: "9px 4px 8px",
             }}
           >
-            <span style={{ fontSize: tab.id === "challenges" ? 22 : 20, lineHeight: 1 }}>
-              {tab.icon}
-            </span>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                width: 30,
+                height: 30,
+                borderRadius: 10,
+                background: isActive ? "rgba(102,102,170,0.12)" : "transparent",
+                color: isActive ? "#6666AA" : "#ADABCE",
+                transform: isActive ? "translateY(-1px)" : "none",
+                transition: "all 0.18s ease",
+              }}
+            >
+              <Icon size={19} strokeWidth={isActive ? 2 : 1.75} />
+            </div>
             <span
               style={{
                 fontSize: 10,
                 fontFamily: "Outfit, sans-serif",
-                fontWeight: 600,
-                color: isActive ? "var(--gold)" : "var(--text-muted)",
+                fontWeight: isActive ? 700 : 600,
+                color: isActive ? "#6666AA" : "#ADABCE",
                 letterSpacing: "0.04em",
               }}
             >
-              {tab.label}
+              {label}
             </span>
             {isActive && (
               <div
                 style={{
                   position: "absolute",
-                  bottom: "calc(100% - 2px)",
-                  width: 24,
-                  height: 2,
-                  background: "var(--gold)",
-                  borderRadius: 2,
+                  top: 4,
+                  right: "32%",
+                  width: 5,
+                  height: 5,
+                  borderRadius: "50%",
+                  background: "#F5A623",
                 }}
               />
             )}

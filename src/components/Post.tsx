@@ -140,9 +140,9 @@ export default function Post({
     <article
       style={{
         background: "#f9f9f9",
-        borderBottom: "1px solid #1E1E3E",
+        borderBottom: "18px",
         borderRadius: "18px",
-        boxShadow: "0 2px 10px rgba(0, 0, 0, 0.2)",
+        boxShadow: "0 2px 12px rgba(45,40,67,0.07)",
       }}
     >
       <div

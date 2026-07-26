@@ -5,7 +5,7 @@ export default function SkeletonBox({ width, height, borderRadius = 8 }: { width
         width,
         height,
         borderRadius,
-        background: "linear-gradient(90deg, #131328 0%, #1E1E3E 50%, #131328 100%)",
+        background: "linear-gradient(90deg, #F2F1FB 0%, #E6E4F5 50%, #F2F1FB 100%)",
         backgroundSize: "200% 100%",
         animation: "shimmer 1.4s ease-in-out infinite",
       }}

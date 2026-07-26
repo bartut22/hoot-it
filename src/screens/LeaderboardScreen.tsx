@@ -9,9 +9,9 @@ import SkeletonBox from "../components/SkeletonBox";
 import { toBackgroundLocation } from "@/lib/router";
 
 function rankColor(rank: number) {
-  if (rank === 1) return "#F5A623";
-  if (rank === 2) return "#94A3B8";
-  if (rank === 3) return "#CD7F32";
+  if (rank === 1) return "#D98A0E";
+  if (rank === 2) return "#7C8698";
+  if (rank === 3) return "#B0703A";
   return "#6666AA";
 }
 
@@ -41,9 +41,10 @@ function StudentRow({ m, rank }: { m: any; rank: number }) {
         alignItems: "center",
         gap: 14,
         padding: "14px 16px",
-        background: "#0C0C1E",
-        border: "1px solid #1E1E3E",
+        background: "#FFFFFF",
+        border: "1px solid #ECEAF9",
         borderRadius: 12,
+        boxShadow: "var(--shadow)",
       }}
     >
       <span style={{ width: 24, fontSize: 14, fontWeight: 700, color: rankColor(rank), fontFamily: "Outfit, sans-serif", textAlign: "center" }}>
@@ -53,20 +54,20 @@ function StudentRow({ m, rank }: { m: any; rank: number }) {
         onClick={() => navigate(`/profile/${m.handle}`, { state: { backgroundLocation: toBackgroundLocation(location) } })}
         style={{ display: "flex", alignItems: "center", gap: 14, flex: 1, cursor: "pointer" }}
       >
-        <div style={{ width: 40, height: 40, borderRadius: "50%", overflow: "hidden", flexShrink: 0, background: "#131328" }}>
+        <div style={{ width: 40, height: 40, borderRadius: "50%", overflow: "hidden", flexShrink: 0, background: "#F2F1FB" }}>
           {m.avatar_url && (
             <img src={m.avatar_url} alt={m.display_name} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
           )}
         </div>
         <div style={{ flex: 1 }}>
-          <div style={{ display: "flex", alignItems: "center", fontSize: 15, fontWeight: 600, color: "#F0F0FF", fontFamily: "Outfit, sans-serif" }}>
+          <div style={{ display: "flex", alignItems: "center", fontSize: 15, fontWeight: 600, color: "#2D2843", fontFamily: "Outfit, sans-serif" }}>
             {m.display_name}
             <ExportIcon />
           </div>
           <div style={{ fontSize: 12, color: "#6666AA" }}>@{m.handle}</div>
         </div>
       </div>
-      <span style={{ fontSize: 16, fontWeight: 800, color: "#F5A623", fontFamily: "Outfit, sans-serif" }}>
+      <span style={{ fontSize: 16, fontWeight: 800, color: "#D98A0E", fontFamily: "Outfit, sans-serif" }}>
         {m.points}
       </span>
     </div>
@@ -78,7 +79,6 @@ export default function LeaderboardScreen() {
   const navigate = useNavigate();
   const allTabs = ["All Students", "Colleges", ...Object.values(COLLEGES).map(c => c.name)];
 
-  // ← Pick up the tab requested by rank medal navigation, fallback to "Students"
   const requestedTab = location.state?.tab;
   const initialTab = requestedTab && allTabs.includes(requestedTab) ? requestedTab : "All Students";
   const [tab, setTab] = useState(initialTab);
@@ -104,9 +104,18 @@ export default function LeaderboardScreen() {
         }
       `}</style>
 
-      <div style={{ padding: "56px 24px 0", background: "linear-gradient(180deg, #0C0C1E 0%, #04040E 100%)" }}>
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 20 }}>
-          <h1 style={{ fontSize: 28, fontWeight: 800, color: "#F0F0FF", letterSpacing: "-0.02em" }}>
+      <div style={{ padding: "56px 24px 0", background: "linear-gradient(180deg, #f9f9f9 0%, #f1f0fa 100%)" }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16 }}>
+          <h1
+            style={{
+              fontSize: 32,
+              fontWeight: 800,
+              color: "#6666AA",
+              letterSpacing: "-0.02em",
+              fontFamily: "DM Serif Text, serif",
+              fontStyle: "italic",
+            }}
+          >
             Leaderboard
           </h1>
         </div>
@@ -140,23 +149,24 @@ export default function LeaderboardScreen() {
                       alignItems: "center",
                       gap: 14,
                       padding: "14px 16px",
-                      background: "#0C0C1E",
-                      border: "1px solid #1E1E3E",
+                      background: "#FFFFFF",
+                      border: "1px solid #ECEAF9",
                       borderRadius: 12,
+                      boxShadow: "var(--shadow)",
                     }}
                   >
                     <span style={{ width: 24, fontSize: 14, fontWeight: 700, color: rankColor(rank), fontFamily: "Outfit, sans-serif", textAlign: "center" }}>
                       {rankEmoji(rank) ?? rank}
                     </span>
                     <div style={{ flex: 1 }}>
-                      <div style={{ fontSize: 15, fontWeight: 700, color: "#F0F0FF", fontFamily: "Outfit, sans-serif" }}>
+                      <div style={{ fontSize: 15, fontWeight: 700, color: "#2D2843", fontFamily: "Outfit, sans-serif" }}>
                         {college.college}
                       </div>
                       <div style={{ fontSize: 12, color: "#6666AA", marginTop: 2 }}>
                         {college.completed} challenge{college.completed !== 1 ? "s" : ""} completed · {college.members} player{college.members !== 1 ? "s" : ""}
                       </div>
                     </div>
-                    <span style={{ fontSize: 16, fontWeight: 800, color: "#F5A623", fontFamily: "Outfit, sans-serif" }}>
+                    <span style={{ fontSize: 16, fontWeight: 800, color: "#D98A0E", fontFamily: "Outfit, sans-serif" }}>
                       {college.points.toLocaleString()}
                     </span>
                   </div>
@@ -183,8 +193,8 @@ export default function LeaderboardScreen() {
                   alignItems: "center",
                   gap: 14,
                   padding: "20px 16px",
-                  background: "#0C0C1E",
-                  border: "1px solid #1E1E3E",
+                  background: "#FFFFFF",
+                  border: "1px solid #ECEAF9",
                   borderRadius: 12,
                 }}
               >
