@@ -121,7 +121,7 @@ export default function LoginScreen() {
   return (
     <div style={{ minHeight: '100dvh', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: 24, gap: 12 }}>
       <h1 style={{ color: '#2D2843', fontSize: 26, marginBottom: 12 }}>
-        {mode === 'signup' ? 'Sign up to Hoot It' : 'Log in to Hoot It'}
+        {mode === 'signup' ? 'Sign up to OwlQuest' : 'Log in to OwlQuest'}
       </h1>
 
       {mode === 'signup' ? (

@@ -155,7 +155,7 @@ export default function StartScreen({ userId, onStartNow }: { userId?: string; o
               fontStyle: "italic",
               fontSize: "4rem",
               // verticalAlign: "bottom",
-            }}>hoot it</h1>
+            }}>owlquest</h1>
             <h2 style={{
               fontFamily: "DM Serif Text, serif",
               fontWeight: 200, fontStyle: "italic",
