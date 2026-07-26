@@ -142,7 +142,7 @@ export default function StartScreen({ userId, onStartNow }: { userId?: string; o
                 position: "absolute",
                 fontSize: "2rem",
                 top: "24px",
-                left: "calc(50% - 2ch)",
+                left: "calc(50%)",
                 transform: "translate(-50%, -50%)",
                 display: "flex",
                 alignItems: "center",
