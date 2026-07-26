@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/lib/supabase";
 import { useAuthUser } from "@/hooks/useAuthUser";
+import DeleteAccountModal from "@/components/DeleteAccountModal";
 
 const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
 const MAX_SIZE_BYTES = 5 * 1024 * 1024;
@@ -23,6 +24,7 @@ export default function ProfileSettings() {
     const [saving, setSaving] = useState(false);
     const [message, setMessage] = useState<string | null>(null);
     const [error, setError] = useState<string | null>(null);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
 
     useEffect(() => {
         if (!userId) return;
@@ -291,6 +293,32 @@ export default function ProfileSettings() {
             >
                 {saving ? "Saving..." : "Save Changes"}
             </button>
+            <button
+                type="button"
+                onClick={() => setShowDeleteModal(true)}
+                style={{
+                    width: "100%",
+                    marginTop: 16,
+                    padding: "12px",
+                    background: "transparent",
+                    border: "1px solid #FF6B6B",
+                    borderRadius: 12,
+                    color: "#FF6B6B",
+                    fontWeight: 700,
+                    fontFamily: "Outfit, sans-serif",
+                    cursor: "pointer",
+                }}
+            >
+                Delete account
+            </button>
+
+            {showDeleteModal && (
+                <DeleteAccountModal
+                    handle={normalizedHandle}
+                    onClose={() => setShowDeleteModal(false)}
+                    onDeleted={() => navigate("/")}
+                />
+            )}
         </div>
     );
 }
