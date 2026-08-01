@@ -19,6 +19,7 @@ import {
   AudioIcon,
 } from "@/components/Icons";
 import ReactMarkdown from 'react-markdown';
+import rehypeRaw from 'rehype-raw';
 
 type Props = { onHootIt: (challengeId: number) => void };
 
@@ -274,7 +275,7 @@ export default function ChallengesScreen({ onHootIt }: Props) {
                   </div>
 
                   <div style={{ fontSize: 14, color: "#7A7AB5", lineHeight: 1.55, fontFamily: "DM Sans, sans-serif" }}>
-                    <ReactMarkdown>{challenge.description}</ReactMarkdown>
+                    <ReactMarkdown rehypePlugins={[rehypeRaw]}>{challenge.description}</ReactMarkdown>
                   </div>
                   
                   <div style={{ display: "flex", alignItems: "center", gap: 6, marginTop: 12, color: "#8A8AC0" }}>

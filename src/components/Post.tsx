@@ -128,6 +128,31 @@ export default function Post({
     }
   }
 
+  async function downloadPostMedia(e: React.MouseEvent<HTMLButtonElement>) {
+    e.stopPropagation();
+
+    if (!mediaUrl) {
+      toast.error("No media available for download");
+      return;
+    }
+
+    try {
+      const response = await fetch(mediaUrl);
+      const blob = await response.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `post-${postId}.${mediaType === "image" ? "jpg" : "mp4"}`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      toast.success("Media downloaded!");
+    } catch {
+      toast.error("Could not download media");
+    }
+  }
+
   function onLikeClick(e: React.MouseEvent<HTMLButtonElement>) {
     e.stopPropagation();
     if (!postId || !toggleLike) return;
@@ -358,7 +383,7 @@ export default function Post({
           style={{
             position: "relative",
             cursor: canOpenPost ? "pointer" : "default",
-            background: "#FFFFFF",
+            background: "black",
           }}
         >
           {mediaType === "video" ? (
@@ -370,9 +395,9 @@ export default function Post({
               playsInline
               controls={!canOpenPost}
               style={{
-                width: "100%",
+                width: "auto",
                 maxHeight: 420,
-                objectFit: "cover",
+                margin: "auto",
                 display: "block",
               }}
             />
@@ -381,9 +406,9 @@ export default function Post({
               src={mediaUrl}
               alt={caption || `Post by ${displayName}`}
               style={{
-                width: "100%",
+                width: "auto",
+                margin: "auto",
                 maxHeight: 420,
-                objectFit: "cover",
                 display: "block",
               }}
             />
@@ -459,6 +484,23 @@ export default function Post({
           >
             🔗
           </button>
+
+          {post.user_id === currentUserId && (
+            <button
+            type="button"
+            aria-label="Download post media"
+            onClick={downloadPostMedia}
+            style={{
+              fontSize: 20,
+              background: "transparent",
+              border: "none",
+              padding: 0,
+              color: "#6666AA",
+            }}
+          >
+            📥
+          </button>
+          )}
         </div>
       </div>
     </article>
