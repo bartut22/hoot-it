@@ -2,6 +2,9 @@
 
 OwlQuest (formerly Hoot It) is a React + Vite social challenge app for college communities. Users sign in through Supabase, complete timed challenges, submit photo or video evidence, and track progress through a college-based leaderboard, social feed, and profile system.
 
+<img width="322" height="699" alt="owlquest vercel app_(iPhone 15 Pro Max)" src="https://github.com/user-attachments/assets/7f74343a-ee12-44fd-aaff-6b2088c41805" /> <img width="322" height="699" alt="owlquest vercel app_leaderboard(iPhone 15 Pro Max)" src="https://github.com/user-attachments/assets/e32dc75a-3731-41e7-b6b0-90cf5d25e03a" />
+
+
 ## What It Does
 
 - Challenge flow: browse active challenges, open a capture flow, and submit proof for review.
