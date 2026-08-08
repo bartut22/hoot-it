@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { supabase } from "@/lib/supabase";
 import { useAuthUser } from "@/hooks/useAuthUser";
 import DeleteAccountModal from "@/components/DeleteAccountModal";
+import { toast } from "sonner";
 
 const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
 const MAX_SIZE_BYTES = 5 * 1024 * 1024;
@@ -25,6 +26,7 @@ export default function ProfileSettings() {
     const [message, setMessage] = useState<string | null>(null);
     const [error, setError] = useState<string | null>(null);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [referralUrl, setReferralUrl] = useState<string>("");
 
     useEffect(() => {
         if (!userId) return;
@@ -39,7 +41,7 @@ export default function ProfileSettings() {
 
             const { data: profile, error } = await supabase
                 .from("profiles")
-                .select("display_name, handle, avatar_url")
+                .select("display_name, handle, avatar_url, referral_code")
                 .eq("id", userId)
                 .single();
 
@@ -50,6 +52,7 @@ export default function ProfileSettings() {
                 setOriginalHandle(profile.handle?.replace(/^@/, "") ?? "");
                 setAvatarUrl(profile.avatar_url ?? null);
                 setOriginalAvatarUrl(profile.avatar_url ?? null);
+                setReferralUrl(`${window.location.origin}/r/${profile.referral_code}`);
             }
             setLoading(false);
         }
@@ -269,6 +272,16 @@ export default function ProfileSettings() {
 
             {error && <p style={{ color: "#FF6B6B", fontSize: 13, marginBottom: 12 }}>{error}</p>}
             {message && <p style={{ color: "#4CD97B", fontSize: 13, marginBottom: 12 }}>{message}</p>}
+            <button
+                onClick={() => {
+                    navigator.clipboard.writeText(referralUrl)
+                    toast.success("Profile link copied to clipboard!");
+                }}
+                className={"tap"}
+                style={{ width: "100%", flex: 1, padding: "12px", background: "#F2F1FB", border: "1px solid #E6E4F5", borderRadius: 12, fontSize: 14, fontWeight: 600, color: "#2D2843", fontFamily: "Outfit, sans-serif" }}
+            >
+                Copy referral link
+            </button>
 
             <button
                 type="button"
@@ -276,6 +289,7 @@ export default function ProfileSettings() {
                 disabled={saving || !isDirty}
                 style={{
                     width: "100%",
+                    marginTop: 16,
                     padding: "14px",
                     background: isDirty
                         ? "linear-gradient(135deg, #4F7FFA 0%, #8B5CF6 100%)"

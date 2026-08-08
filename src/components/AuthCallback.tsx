@@ -12,6 +12,17 @@ export default function AuthCallback() {
     let next = searchParams.get("next") ?? "/"
     if (!next.startsWith("/")) next = "/"
 
+    async function maybeClaimReferral() {
+      const pendingCode = localStorage.getItem("owlquest_pending_ref");
+      if (!pendingCode) return;
+
+      const { data, error } = await supabase.rpc("stage_referral", { p_code: pendingCode });
+
+      if (!error && data) {
+        localStorage.removeItem("owlquest_pending_ref");
+      }
+    }
+
     async function processSession(session: any) {
       if (handled.current || !session) return
       handled.current = true
@@ -33,6 +44,8 @@ export default function AuthCallback() {
         navigate("/login?error=auth-code-error")
         return
       }
+      
+      maybeClaimReferral();
 
       if (profile.first_login || !profile.handle) {
         const params = new URLSearchParams({

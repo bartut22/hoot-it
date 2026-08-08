@@ -18,6 +18,7 @@ import {
   CheckIcon,
   HourglassIcon,
 } from "@/components/Icons";
+import { toast } from "sonner";
 
 const collegeColors: Record<string, { backgroundColor: string; textColor: string }> = {
   "Baker": { backgroundColor: "#8f2513", textColor: "#f8b80f" }, //
@@ -303,6 +304,10 @@ export default function ProfileScreen({
                   Edit Profile
                 </button>
                 <button
+                  onClick={() => {
+                    navigator.clipboard.writeText(`${window.location.origin}/profile/${profile.handle}`);
+                    toast.success("Profile link copied to clipboard!");
+                  }}
                   className={"tap"}
                   style={{ flex: 1, padding: "12px", background: "#F2F1FB", border: "1px solid #E6E4F5", borderRadius: 12, fontSize: 14, fontWeight: 600, color: "#2D2843", fontFamily: "Outfit, sans-serif" }}
                 >

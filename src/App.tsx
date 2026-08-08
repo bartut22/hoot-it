@@ -19,6 +19,7 @@ import { Toaster } from "sonner";
 import OnboardingScreen from "./screens/OnboardingScreen";
 import FollowListScreen from "./screens/FollowListScreen";
 import PostScreen from "./screens/PostScreen";
+import ReferralLink from "./components/ReferralLink";
 
 type Tab = "leaderboard" | "feed" | "challenges" | "profile" | "progress";
 
@@ -298,6 +299,7 @@ export default function App() {
       <Routes>
         <Route path="/auth/callback" element={<AuthCallback />} />
         <Route path="/onboarding" element={<OnboardingScreen session={session} />} />
+        <Route path="/r/:code" element={<ReferralLink />} />
         <Route
           path="*"
           element={
